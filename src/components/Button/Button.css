@@ -1,0 +1,17 @@
+.Button button {
+  margin: 0 5px;
+  border: none;
+  border-radius: 3px;
+  outline-color: grey;
+}
+
+.qty-btn {
+  width: 25px;
+  height: 25px;
+}
+
+.del-btn {
+  width: 35px;
+  height: 30px;
+  font-weight: 600;
+}
