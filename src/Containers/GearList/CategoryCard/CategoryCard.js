@@ -22,6 +22,11 @@ const CategoryCard = ({
   const addCategoryItem = () => {
     setAddCategoryItemForm(true);
   };
+
+  const saveCategoryNewItem = () => {
+    setAddCategoryItemForm(false);
+  };
+
   // const initialListData = JSON.parse(window.localStorage.getItem('listItems'));
   // const initialPackedArr = JSON.parse(
   //   window.localStorage.getItem('packedItems'),
@@ -63,16 +68,18 @@ const CategoryCard = ({
         ))}
         {addCategoryItemForm && (
           <CategoryCardNewItem
+            categoryId={id}
             categoryName={name}
             optionsList={selectOptionData[name.toLowerCase()]}
             addCategoryNewItem={addCategoryNewItem}
+            saveCategoryNewItem={saveCategoryNewItem}
           />
         )}
         <div className="categoryFooter">
           <Button
             className="add-btn"
-            onClick={addCategoryItem}
             label="Add Item"
+            onClick={addCategoryItem}
             disabled={addCategoryItemForm}
           />
         </div>

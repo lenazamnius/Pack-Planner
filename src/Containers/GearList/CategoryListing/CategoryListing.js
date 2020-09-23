@@ -50,6 +50,21 @@ export default function CategoryListing({ gearListData }) {
     .reduce((total, item) => total + item, 0)
     .toFixed(3);
 
+  const addCategoryNewItem = (inputName, inputWeight, inputQty, categoryId) => {
+    const newItemData = {
+      name: inputName.toLowerCase(),
+      id: uuidv4(),
+      weight: Number(inputWeight),
+      qty: Number(inputQty),
+    };
+    const newGearListItems = gearListItems.map((category) => {
+      return category.id === categoryId
+        ? { ...category, list: [...category.list, newItemData] }
+        : { ...category };
+    });
+    setGearListItems(newGearListItems);
+  };
+
   const updateGearListData = (id, name, categoryId) => {
     const newListItems = gearListItems.filter((item) => item.id !== id);
     const updatePackedArr = categoryPackedItems.filter(
@@ -72,17 +87,6 @@ export default function CategoryListing({ gearListData }) {
       : categoryPackedItems.filter((item) => item[name] !== itemId);
     console.log(updatedArr);
     setCategoryPackedItems(updatedArr);
-  };
-
-  const addCategoryNewItem = (inputName, inputWeight, inputQty) => {
-    const newItemData = {
-      name: inputName,
-      id: uuidv4(),
-      weight: Number(inputWeight),
-      qty: Number(inputQty),
-    };
-    setGearListItems([...gearListItems, newItemData]);
-    // setAddCategoryItemForm(false);
   };
 
   return (

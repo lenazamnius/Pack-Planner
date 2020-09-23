@@ -5,9 +5,11 @@ import Select from '../../../components/Select/Select';
 import capitalize from '../../../helpers/helpersFunc';
 
 const CategoryCardNewItem = ({
+  categoryId,
   categoryName,
   optionsList,
   addCategoryNewItem,
+  saveCategoryNewItem,
 }) => {
   const [inputName, setInputName] = useState(capitalize(optionsList[0]));
   const [inputWeight, setInputWeight] = useState('');
@@ -15,7 +17,8 @@ const CategoryCardNewItem = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addCategoryNewItem(inputName, inputWeight, inputQty);
+    addCategoryNewItem(inputName, inputWeight, inputQty, categoryId);
+    saveCategoryNewItem();
   };
 
   return (
