@@ -1,28 +1,30 @@
 import React from 'react';
 import './CategoryCardItem.css';
+import capitalize from '../../../helpers/helpersFunc';
 import Button from '../../../components/Button';
 import CheckBox from '../../../components/CheckBox/CheckBox';
 
 const CategoryCardItem = ({
   id,
+  qty,
   name,
   weight,
-  qty,
   packed,
+  categoryId,
   updateQuantity,
-  updateDataList,
+  updateGearListData,
   updateItemsAsPacked,
   updatePackedItemsArr,
 }) => {
-  const addOne = () => updateQuantity(id, qty + 1);
-  const subtractOne = () => updateQuantity(id, qty - 1);
-  const deleteListItem = () => updateDataList(id, name);
-  const markAsDone = () => updateItemsAsPacked(id, packed);
+  const addOne = () => updateQuantity(id, qty + 1, categoryId);
+  const subtractOne = () => updateQuantity(id, qty - 1, categoryId);
+  const markAsDone = () => updateItemsAsPacked(id, packed, categoryId);
+  const deleteListItem = () => updateGearListData(id, name, categoryId);
   const addToPackedItemsArr = () => updatePackedItemsArr(id, packed, name);
 
   return (
     <div className={`CategoryCardItem ${packed ? 'packed' : ''}`}>
-      <div className="CardItemCol">{name}</div>
+      <div className="CardItemCol">{capitalize(name)}</div>
       <div className="CardItemCol">{weight} kg</div>
       <div className="CardItemCol">
         <Button

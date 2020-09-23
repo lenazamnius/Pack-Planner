@@ -1,13 +1,25 @@
 import React from 'react';
-import './CategoryHeader.css';
 import Button from '../../../components/Button';
+import Select from '../../../components/Select';
+import { v4 as uuidv4 } from 'uuid';
+import './CategoryHeader.css';
 
-const CategoryHeader = ({ name, id }) => {
-  const deleteCategory = () => console.log('category deleted', id);
+const CategoryHeader = ({ id, name, optionsList, inputName, setInputName }) => {
+  const categoryId = !id ? uuidv4() : id;
+  const deleteCategory = () => console.log('category deleted', categoryId);
 
   return (
     <div className="CategoryHeader">
-      <p className="CategoryTitle">{name}</p>
+      {name ? (
+        <p className="CategoryTitle">{name}</p>
+      ) : (
+        <Select
+          optionsList={optionsList}
+          inputValue={inputName}
+          onInputChange={setInputName}
+          required
+        />
+      )}
       <Button className="del-btn" onClick={deleteCategory} label="x" />
     </div>
   );

@@ -2,15 +2,12 @@ import React, { useState } from 'react';
 import './CategoryCardNewItem.css';
 import Input from '../../../components/Input/Input';
 import Select from '../../../components/Select/Select';
-
-const capitalize = (word) => {
-  return word.replace(/\b\w/g, (char) => char.toUpperCase());
-};
+import capitalize from '../../../helpers/helpersFunc';
 
 const CategoryCardNewItem = ({
   categoryName,
   optionsList,
-  setCategoryNewItem,
+  addCategoryNewItem,
 }) => {
   const [inputName, setInputName] = useState(capitalize(optionsList[0]));
   const [inputWeight, setInputWeight] = useState('');
@@ -18,7 +15,7 @@ const CategoryCardNewItem = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setCategoryNewItem(inputName, inputWeight, inputQty);
+    addCategoryNewItem(inputName, inputWeight, inputQty);
   };
 
   return (
