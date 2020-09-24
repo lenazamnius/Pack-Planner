@@ -27,29 +27,6 @@ const CategoryCard = ({
     setAddCategoryItemForm(false);
   };
 
-  // const initialListData = JSON.parse(window.localStorage.getItem('listItems'));
-  // const initialPackedArr = JSON.parse(
-  //   window.localStorage.getItem('packedItems'),
-  // );
-  // const [listItems, setListItems] = useState(
-  //   initialListData || categoryListData,
-  // );
-  // const [categoryPackedItems, setCategoryPackedItems] = useState(
-  //   initialPackedArr || [],
-  // );
-
-  // useEffect(() => {
-  //   // window.localStorage.setItem('listItems', JSON.stringify(listItems));
-  //   window.localStorage.setItem(
-  //     'packedItems',
-  //     JSON.stringify(categoryPackedItems),
-  //   );
-  // }, [categoryPackedItems]);
-
-  // const totalWeight = listItems
-  //   .reduce((total, item) => total + item.weight * item.qty, 0)
-  //   .toFixed(2);
-
   return (
     <div className="Category">
       <div className="CategoryWrapper">

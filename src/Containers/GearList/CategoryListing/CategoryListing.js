@@ -65,32 +65,49 @@ export default function CategoryListing({ gearListData }) {
     setGearListItems(newGearListItems);
   };
 
-  const updateGearListData = (id, name, categoryId) => {
-    const newListItems = gearListItems.filter((item) => item.id !== id);
-    const updatePackedArr = categoryPackedItems.filter(
-      (item) => item[name] !== id,
+  const updateGearListData = (id, categoryId) => {
+    const updatedPackedArr = categoryPackedItems.filter(
+      (item) => item[categoryId] !== id,
     );
-    setGearListItems(newListItems);
-    setCategoryPackedItems(updatePackedArr);
+    const newGearListItems = gearListItems.map((category) => {
+      return category.id === categoryId
+        ? {
+            ...category,
+            list: [...category.list.filter((item) => item.id !== id)],
+          }
+        : { ...category };
+    });
+
+    setGearListItems(newGearListItems);
+    setCategoryPackedItems(updatedPackedArr);
   };
 
   const updateItemsAsPacked = (id, packed, categoryId) => {
-    const newListItems = gearListItems.map((item) => {
-      return item.id === id ? { ...item, packed: !packed } : item;
+    const newGearListItems = gearListItems.map((category) => {
+      return category.id === categoryId
+        ? {
+            ...category,
+            list: [
+              ...category.list.map((item) => {
+                return item.id === id ? { ...item, packed: !packed } : item;
+              }),
+            ],
+          }
+        : { ...category };
     });
-    setGearListItems(newListItems);
+    setGearListItems(newGearListItems);
   };
 
-  const updatePackedItemsArr = (itemId, packed, name) => {
+  const updatePackedItemsArr = (itemId, packed, categoryId) => {
     const updatedArr = !packed
-      ? [...categoryPackedItems, { [name]: itemId }]
-      : categoryPackedItems.filter((item) => item[name] !== itemId);
-    console.log(updatedArr);
+      ? [...categoryPackedItems, { [categoryId]: itemId }]
+      : categoryPackedItems.filter((item) => item[categoryId] !== itemId);
     setCategoryPackedItems(updatedArr);
   };
 
   return (
     <div className="CategoryListing">
+      <p className="TotalListWeight">Total Pack Weight: {totalWeight} kg</p>
       {gearListItems.map((categoryData) => {
         const { id, categoryName, list } = categoryData;
 
@@ -108,9 +125,7 @@ export default function CategoryListing({ gearListData }) {
           />
         );
       })}
-      {/* <CategoryCard categoryListData={list} name={categoryName} id={id} /> */}
       <CreateCategoryCard optionsList={selectCategoryData} />
-      <p className="TotalListWeight">Total Weight: {totalWeight} kg</p>
     </div>
   );
 }

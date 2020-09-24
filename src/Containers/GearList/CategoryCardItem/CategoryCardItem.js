@@ -19,8 +19,9 @@ const CategoryCardItem = ({
   const addOne = () => updateQuantity(id, qty + 1, categoryId);
   const subtractOne = () => updateQuantity(id, qty - 1, categoryId);
   const markAsDone = () => updateItemsAsPacked(id, packed, categoryId);
-  const deleteListItem = () => updateGearListData(id, name, categoryId);
-  const addToPackedItemsArr = () => updatePackedItemsArr(id, packed, name);
+  const deleteListItem = () => updateGearListData(id, categoryId);
+  const addToPackedItemsArr = () =>
+    updatePackedItemsArr(id, packed, categoryId);
 
   return (
     <div className={`CategoryCardItem ${packed ? 'packed' : ''}`}>
@@ -37,7 +38,7 @@ const CategoryCardItem = ({
         <Button className="qty-btn" onClick={addOne} label="+" />
         piece
       </div>
-      <div className="CardItemCol">weight - {(qty * weight).toFixed(2)} kg</div>
+      <div className="CardItemCol">weight - {(qty * weight).toFixed(3)} kg</div>
       <CheckBox
         type="checkbox"
         onClick={markAsDone}
