@@ -1,5 +1,6 @@
 export const selectOptionData = {
   shelter: [
+    'select item',
     'tent',
     'slipping bag',
     'sleeping bag liner',
@@ -110,7 +111,6 @@ export const selectOptionData = {
     'diarrhea',
     'band Aids',
   ],
-  consumables: ['fuel', 'duct tape', 'food', 'water'],
   miscellaneous: [
     'glasses',
     'trekking poles',
@@ -122,6 +122,7 @@ export const selectOptionData = {
     'keys',
   ],
   electronics: [
+    'select item',
     'phone',
     'USB cable',
     'USB adapter',
@@ -131,23 +132,25 @@ export const selectOptionData = {
     'earphones',
     'power bank',
   ],
+  consumables: ['fuel', 'duct tape', 'food', 'water'],
 };
 
 export const selectCategoryData = [
+  'select category',
+  'pack',
   'shelter',
-  'carry system',
-  'sleeping gear',
   'kitchen',
+  'clothing',
+  'first AID',
   'rain gear',
   'toiletries',
-  'clothing',
-  'consumables',
-  'pack',
-  'first AID',
   'electronics',
+  'consumables',
   'food related',
+  'sleeping gear',
+  'carry system',
   'miscellaneous',
-  'technical equipment',
   'storage',
   'survival',
+  'technical equipment',
 ];

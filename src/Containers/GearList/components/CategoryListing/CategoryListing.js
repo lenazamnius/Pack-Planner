@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import CategoryCard from '../CategoryCard';
-import CreateCategoryCard from '../CreateCategoryCard/CreateCategoryCard';
-import { selectCategoryData } from '../../../data/selectData';
+import Button from '../../../../components/Button';
 import { v4 as uuidv4 } from 'uuid';
 import './CategoryListing.css';
 
@@ -9,23 +8,19 @@ export default function CategoryListing({ gearListData }) {
   const initialListData = JSON.parse(
     window.localStorage.getItem('gearListItems'),
   );
-  const initialPackedArr = JSON.parse(
-    window.localStorage.getItem('packedItems'),
+  const initialCheckedArr = JSON.parse(
+    window.localStorage.getItem('checkedItems'),
   );
   const [gearListItems, setGearListItems] = useState(
     initialListData || gearListData,
   );
-  const [categoryPackedItems, setCategoryPackedItems] = useState(
-    initialPackedArr || [],
-  );
+  const [checkedItems, setCheckedItems] = useState(initialCheckedArr || []);
+  const [addNewCategoryCard, setAddingNewCategoryCard] = useState(false);
 
   useEffect(() => {
     window.localStorage.setItem('gearListItems', JSON.stringify(gearListItems));
-    window.localStorage.setItem(
-      'packedItems',
-      JSON.stringify(categoryPackedItems),
-    );
-  }, [gearListItems, categoryPackedItems]);
+    window.localStorage.setItem('checkedItems', JSON.stringify(checkedItems));
+  }, [gearListItems, checkedItems]);
 
   const updateQuantity = (itemId, newQty, categoryId) => {
     const categoryIdx = gearListItems.findIndex(
@@ -66,7 +61,7 @@ export default function CategoryListing({ gearListData }) {
   };
 
   const updateGearListData = (id, categoryId) => {
-    const updatedPackedArr = categoryPackedItems.filter(
+    const updatedCheckedArr = checkedItems.filter(
       (item) => item[categoryId] !== id,
     );
     const newGearListItems = gearListItems.map((category) => {
@@ -79,10 +74,10 @@ export default function CategoryListing({ gearListData }) {
     });
 
     setGearListItems(newGearListItems);
-    setCategoryPackedItems(updatedPackedArr);
+    setCheckedItems(updatedCheckedArr);
   };
 
-  const updateItemsAsPacked = (id, packed, categoryId) => {
+  const updateItemsAsChecked = (id, packed, categoryId) => {
     const newGearListItems = gearListItems.map((category) => {
       return category.id === categoryId
         ? {
@@ -98,16 +93,51 @@ export default function CategoryListing({ gearListData }) {
     setGearListItems(newGearListItems);
   };
 
-  const updatePackedItemsArr = (itemId, packed, categoryId) => {
+  const updateCheckedItemsArr = (itemId, packed, categoryId) => {
     const updatedArr = !packed
-      ? [...categoryPackedItems, { [categoryId]: itemId }]
-      : categoryPackedItems.filter((item) => item[categoryId] !== itemId);
-    setCategoryPackedItems(updatedArr);
+      ? [...checkedItems, { [categoryId]: itemId }]
+      : checkedItems.filter((item) => item[categoryId] !== itemId);
+    setCheckedItems(updatedArr);
+  };
+
+  const addCategory = () => {
+    setAddingNewCategoryCard(true);
+  };
+
+  const deleteCategoryHandler = (categoryId) => {
+    const newGearListItems = gearListItems.filter(
+      (item) => item.id !== categoryId,
+    );
+    const updatedCheckedArr = checkedItems.filter(
+      (item) => Object.keys(item)[0] !== categoryId,
+    );
+
+    setAddingNewCategoryCard(false);
+    setGearListItems(newGearListItems);
+    setCheckedItems(updatedCheckedArr);
   };
 
   return (
     <div className="CategoryListing">
-      <p className="TotalListWeight">Total Pack Weight: {totalWeight} kg</p>
+      <div className="CategoryListingHeader">
+        <Button
+          className="add-btn"
+          label="+ Add Category"
+          onClick={addCategory}
+          disabled={addNewCategoryCard}
+        />
+        <p className="TotalListWeight">Total Pack Weight: {totalWeight} kg</p>
+      </div>
+      {addNewCategoryCard && (
+        <CategoryCard
+          updateQuantity={updateQuantity}
+          updateGearListData={updateGearListData}
+          addCategoryNewItem={addCategoryNewItem}
+          updateItemsAsChecked={updateItemsAsChecked}
+          updateCheckedItemsArr={updateCheckedItemsArr}
+          deleteCategoryHandler={deleteCategoryHandler}
+        />
+      )}
       {gearListItems.map((categoryData) => {
         const { id, categoryName, list } = categoryData;
 
@@ -120,12 +150,12 @@ export default function CategoryListing({ gearListData }) {
             updateQuantity={updateQuantity}
             updateGearListData={updateGearListData}
             addCategoryNewItem={addCategoryNewItem}
-            updateItemsAsPacked={updateItemsAsPacked}
-            updatePackedItemsArr={updatePackedItemsArr}
+            updateItemsAsChecked={updateItemsAsChecked}
+            updateCheckedItemsArr={updateCheckedItemsArr}
+            deleteCategoryHandler={deleteCategoryHandler}
           />
         );
       })}
-      <CreateCategoryCard optionsList={selectCategoryData} />
     </div>
   );
 }

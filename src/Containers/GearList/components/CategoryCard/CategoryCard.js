@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import CategoryHeader from '../CategoryHeader';
 import Button from '../../../../components/Button';
-import CategoryCardItem from '../../CategoryCardItem';
+import CategoryCardItem from '../CategoryCardItem';
 import CategoryCardNewItem from '../CategoryCardNewItem';
 import capitalize from '../../../../helpers/helpersFunc';
-import { selectOptionData } from '../../../../data/selectData';
-import { selectCategoryData } from '../../../../data/selectData';
+import {
+  selectOptionData,
+  selectCategoryData,
+} from '../../../../data/selectData';
 import './CategoryCard.css';
 
 const CategoryCard = ({

@@ -1,14 +1,27 @@
 import React from 'react';
-import CategoryListing from './Containers/GearList/CategoryListing/CategoryListing';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
-import gearListData from './data/gearListData';
+import About from './Containers/About';
+import GearList from './Containers/GearList';
+import NavBar from './components/NavBar/NavBar';
+import GearListBoard from './Containers/GearListBoard';
+import Auth from './Containers/Auth/';
 import './App.css';
 
-export default function App() {
+const App = () => {
   return (
-    <div className="App">
-      <h1 className="header">Hiking Gear Checklists header</h1>
-      <CategoryListing gearListData={gearListData} />
-    </div>
+    <Router>
+      <div className="App">
+        <NavBar />
+        <Switch>
+          <Route component={About} exact path="/" />
+          <Route component={Auth} exact path="/login" />
+          <Route component={GearList} exact path="/gear-list/:user/:id" />
+          <Route component={GearListBoard} exact path="/gear-list-board" />
+        </Switch>
+      </div>
+    </Router>
   );
-}
+};
+
+export default App;

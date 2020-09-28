@@ -5,14 +5,16 @@
   margin-top: 5px;
 }
 
-.CategoryCardItem .CardItemCol {
-  width: 25%;
-  margin: 10px 10px 5px 0;
-}
-
-.CardItemCol {
+.card-item-col {
   display: flex;
   flex-direction: row;
+  width: 20%;
+  margin: 5px 0 10px 0;
+}
+
+.last-column {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .packed {
