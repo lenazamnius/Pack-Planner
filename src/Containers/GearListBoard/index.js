@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
 import {
   Box,
-  Typography,
   Card,
+  Button,
+  Typography,
   CardActionArea,
   CardActions,
   CardContent,
   CardMedia,
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 import image from '../../data/images/mountain.jpg';
-import { NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles({
   root: {
@@ -19,16 +20,6 @@ const useStyles = makeStyles({
   },
   cardsWrapper: {
     display: 'flex',
-  },
-  link: {
-    margin: '10px',
-    padding: '10px',
-    color: '#3f51b5',
-    fontSize: '1.1rem',
-    fontWeight: '800',
-    textDecoration: 'none',
-    borderRadius: '5px',
-    border: '2px solid #3f51b5',
   },
 });
 
@@ -71,12 +62,15 @@ export default function GearListBoard() {
                 </CardContent>
               </CardActionArea>
               <CardActions>
-                <NavLink
-                  className={classes.link}
+                <Button
+                  component={Link}
                   to="/gear-list/LenaZamnius/25t62"
+                  variant="outlined"
+                  color="primary"
+                  size="large"
                 >
                   Watch Gear List
-                </NavLink>
+                </Button>
               </CardActions>
             </Card>
           );

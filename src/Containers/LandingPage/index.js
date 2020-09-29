@@ -1,10 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { Box, Typography, Button } from '@material-ui/core';
 
-import { Box, Typography } from '@material-ui/core';
-
-export default function About() {
+const LandingPage = () => {
   return (
-    <Box className="About">
+    <Box className="LandingPage">
       <Typography variant="h3" gutterBottom>
         Here will be the description of Pack Planner App
       </Typography>
@@ -14,6 +14,17 @@ export default function About() {
         consectetur, neque doloribus, cupiditate numquam dignissimos laborum
         fugiat deleniti? Eum quasi quidem quibusdam.
       </Typography>
+      <Button
+        to="/login"
+        component={Link}
+        variant="contained"
+        color="primary"
+        size="large"
+      >
+        Lets Plan Pack
+      </Button>
     </Box>
   );
-}
+};
+
+export default LandingPage;

@@ -1,0 +1,12 @@
+.LoginForm {
+  display: flex;
+  justify-content: center;
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 10px;
+}
+
+.form-container {
+  width: 100%;
+  padding: 15px 10px;
+}

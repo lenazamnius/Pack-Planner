@@ -1,8 +1,8 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import { AppBar, Toolbar, Typography, IconButton } from '@material-ui/core';
-import { NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const NavBar = () => {
+const NavBar = ({ logged, logOutPressed }) => {
   const classes = useStyles();
 
   return (
@@ -38,16 +38,17 @@ const NavBar = () => {
           </Typography>
           <div>
             <NavLink className={classes.link} to="/">
-              About
+              Home
             </NavLink>
-            {/* <NavLink className={classes.link} to="/gear-list/LenaZamnius/25t62">
-              GearList
-            </NavLink> */}
             <NavLink className={classes.link} to="/gear-list-board">
-              ListBoard
+              PackBoard
             </NavLink>
-            <NavLink className={classes.link} to="/login">
-              Login
+            <NavLink
+              className={classes.link}
+              to="/login"
+              onClick={logOutPressed}
+            >
+              {logged ? 'LogOut' : 'LogIn'}
             </NavLink>
           </div>
         </Toolbar>
