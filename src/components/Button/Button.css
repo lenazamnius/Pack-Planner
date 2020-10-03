@@ -18,12 +18,10 @@
   background-color: rgba(255, 217, 0, 0.3);
 }
 
-
 .del-btn {
   width: 25px;
   height: 20px;
   font-weight: 600;
-  
 }
 
 .del-btn:hover {
@@ -44,7 +42,6 @@
   width: 80px;
   padding: 8px 10px;
   font-size: 1.1rem;
-  /* background-color: lightgreen; */
   border: none;
   border-radius: 3px;
   outline: none;

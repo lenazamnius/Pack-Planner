@@ -4,7 +4,7 @@ import Button from '../../../../components/Button';
 import { v4 as uuidv4 } from 'uuid';
 import './CategoryListing.css';
 
-export default function CategoryListing({ gearListData }) {
+const CategoryListing = ({ gearListData }) => {
   const initialListData = JSON.parse(
     window.localStorage.getItem('gearListItems'),
   );
@@ -158,4 +158,6 @@ export default function CategoryListing({ gearListData }) {
       })}
     </div>
   );
-}
+};
+
+export default CategoryListing;

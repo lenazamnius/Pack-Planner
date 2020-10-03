@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import firebase from '../../firebase/config';
+import image from '../../data/images/mountain.jpg';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Box,
@@ -11,7 +13,6 @@ import {
   CardContent,
   CardMedia,
 } from '@material-ui/core';
-import image from '../../data/images/mountain.jpg';
 
 const useStyles = makeStyles({
   root: {
@@ -23,17 +24,25 @@ const useStyles = makeStyles({
   },
 });
 
-export default function GearListBoard() {
+const GearListBoard = () => {
   const classes = useStyles();
   const [packList, setPackList] = useState([
     { name: 'Gorgany little hike', date: '12 july 2020', id: '1glb' },
     { name: 'Chernogora autumn', date: '2 october 2020', id: '2glb' },
   ]);
 
+  if (!firebase.getUserCurrentName()) {
+    console.log('log in, please');
+    // props.history.replace('/login');
+    return null;
+  }
+
   return (
     <Box className="GearListBoard">
       <Typography variant="h3" gutterBottom>
-        You have {packList.length} gear lists.
+        {/* Hello . You have {packList.length} gearlists. */}
+        Hello {firebase.getUserCurrentName()}. You have {packList.length} Gear
+        Lists.
       </Typography>
       <Box className={classes.cardsWrapper}>
         {packList.map((pack) => {
@@ -64,7 +73,8 @@ export default function GearListBoard() {
               <CardActions>
                 <Button
                   component={Link}
-                  to="/gear-list/LenaZamnius/25t62"
+                  // to=`/gear-list/{id}`
+                  to="/gear-list/25t62"
                   variant="outlined"
                   color="primary"
                   size="large"
@@ -78,4 +88,6 @@ export default function GearListBoard() {
       </Box>
     </Box>
   );
-}
+};
+
+export default GearListBoard;

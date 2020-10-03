@@ -2,7 +2,9 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import { AppBar, Toolbar, Typography, IconButton } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton } from '@material-ui/core';
+import LoggedNavMenu from './LoggedNavMenu';
+import LoggedOutNavMenu from './LoggedOutNavMenu';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,38 +21,35 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const NavBar = ({ logged, logOutPressed }) => {
+// const NavBar = ({ logged, logOut }) => {
+const NavBar = ({ logged, setIsLogged }) => {
   const classes = useStyles();
+  console.log('from navbar', logged);
 
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <DashboardIcon />
-          <IconButton
+          <NavLink className={classes.link} to="/">
+            PackPlanner
+          </NavLink>
+          {logged ? (
+            <LoggedNavMenu setIsLogged={setIsLogged} />
+          ) : (
+            <LoggedOutNavMenu />
+          )}
+          {/* <IconButton
             edge="start"
             className={classes.menuButton}
             color="inherit"
             aria-label="menu"
-          ></IconButton>
+          >
+            <DashboardIcon size="large" />
+          </IconButton>
           <Typography variant="h4" className={classes.title}>
             PackPlanner
-          </Typography>
-          <div>
-            <NavLink className={classes.link} to="/">
-              Home
-            </NavLink>
-            <NavLink className={classes.link} to="/gear-list-board">
-              PackBoard
-            </NavLink>
-            <NavLink
-              className={classes.link}
-              to="/login"
-              onClick={logOutPressed}
-            >
-              {logged ? 'LogOut' : 'LogIn'}
-            </NavLink>
-          </div>
+          </Typography> */}
+          {/* {logged ? <LoggedNavMenu logOut={logOut} /> : <LoggedOutNavMenu />} */}
         </Toolbar>
       </AppBar>
     </div>

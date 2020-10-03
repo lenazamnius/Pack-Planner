@@ -1,5 +1,5 @@
 import React from 'react';
-import CategoryListing from './components/CategoryListing/';
+import CategoryListing from './components/CategoryListing';
 import GearListHeader from './components/GearListHeader';
 import gearListData from '../../data/gearListData';
 import { useParams } from 'react-router';

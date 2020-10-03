@@ -1,20 +1,34 @@
 import React, { useState } from 'react';
-import Input from '../../../components/Input';
 import Paper from '@material-ui/core/Paper';
-import './LoginForm.css';
+import Input from '../../../../components/Input';
+import firebase from '../../../../firebase/config';
 
-const LoginForm = () => {
+import './RegisterForm.css';
+
+const RegisterForm = (props) => {
+  const { setIsLogged } = props;
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
 
+  const register = async () => {
+    try {
+      await firebase.register(name, email, password);
+      setIsLogged(true);
+      props.history.push('/gear-list-board');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({ email, name, password });
+    const registerData = { email, name, password };
+    window.localStorage.setItem('registerData', JSON.stringify(registerData));
   };
 
   return (
-    <Paper className="LoginForm">
+    <Paper className="AuthForm">
       <form className="form-container" name="auth-form" onSubmit={handleSubmit}>
         <Input
           className="int-auth"
@@ -43,10 +57,15 @@ const LoginForm = () => {
           onInputChange={setPassword}
           required
         />
-        <Input className="auth-save-btn" type="submit" value="save" />
+        <Input
+          className="auth-save-btn"
+          type="submit"
+          value="Register"
+          onClick={register}
+        />
       </form>
     </Paper>
   );
 };
 
-export default LoginForm;
+export default RegisterForm;

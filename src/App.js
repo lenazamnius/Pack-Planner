@@ -1,34 +1,54 @@
-import React, { useState } from 'react';
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
-
-import LandingPage from './Containers/LandingPage';
-import Auth from './Containers/Auth/';
-import GearList from './Containers/GearList';
-import NavBar from './components/NavBar/NavBar';
-import GearListBoard from './Containers/GearListBoard';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { CircularProgress, Box } from '@material-ui/core';
+import firebase from './firebase/config';
+import RootRouter from './routes/RootRouter';
+import NavBar from './containers/NavBar';
 import './App.css';
 
 const App = () => {
-  const [isLogged, setIsLogged] = useState(true);
+  // const [isLogged, setIsLogged] = useState(true);
 
-  const logOutPressed = () => {
-    const newLoggedValue = false;
+  // const logOutHandler = () => {
+  //   const newLoggedValue = false;
 
-    setIsLogged(newLoggedValue);
-  };
+  //   setIsLogged(newLoggedValue);
+  // };
 
-  return (
+  // return (
+  //   <Router>
+  //     <NavBar logged={isLogged} logOut={logOutHandler} />
+  //     <RootRouter logged={isLogged} />
+  //   </Router>
+  // );
+
+  const [firebaseInitialized, setFirebaseInitialized] = useState();
+  const [isLogged, setIsLogged] = useState();
+
+  useEffect(() => {
+    firebase.isInitialized().then((val) => {
+      const logged = !!val;
+      setFirebaseInitialized(val);
+      setIsLogged(logged);
+    });
+    console.log({ firebaseInitialized, isLogged });
+  });
+
+  // const logOutHandler = async () => {
+  //   const newLoggedValue = false;
+
+  //   setFirebaseInitialized(newLoggedValue);
+  // };
+
+  return firebaseInitialized !== false ? (
     <Router>
-      <NavBar logged={isLogged} logOutPressed={logOutPressed} />
-      <div className="container">
-        <Switch>
-          <Route component={Auth} exact path="/login" />
-          <Route component={LandingPage} exact path="/" />
-          <Route component={GearList} exact path="/gear-list/:user/:id" />
-          <Route component={GearListBoard} exact path="/gear-list-board" />
-        </Switch>
-      </div>
+      <NavBar logged={isLogged} setIsLogged={setIsLogged} />
+      <RootRouter logged={isLogged} setIsLogged={setIsLogged} />
     </Router>
+  ) : (
+    <Box className="loader">
+      <CircularProgress />
+    </Box>
   );
 };
 
