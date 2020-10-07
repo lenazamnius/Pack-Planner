@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Button from '../../../../components/Button';
 import Select from '../../../../components/Select';
-import capitalize from '../../../../helpers/helpersFunc';
+import { capitalize } from '../../../../helpers/helpersFunc';
 import { v4 as uuidv4 } from 'uuid';
 import './CategoryHeader.css';
 

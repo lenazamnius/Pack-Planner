@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Box, Typography, Button } from '@material-ui/core';
 
-const LandingPage = () => {
+const LandingPage = ({ logged }) => {
   return (
     <Box className="LandingPage">
       <Typography variant="h3" gutterBottom>
@@ -14,8 +14,8 @@ const LandingPage = () => {
         checklist for several people at the same. Plus much more.
       </Typography>
       <Button
-        // to={logged ? `/gear-list/${id}` : '/login'}
-        to="/login"
+        to={logged ? '/gear-list/:id' : '/login'}
+        // to= `/gear-list/${id}`
         component={Link}
         variant="contained"
         color="primary"

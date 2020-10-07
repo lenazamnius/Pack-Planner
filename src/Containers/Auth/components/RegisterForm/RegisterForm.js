@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import Paper from '@material-ui/core/Paper';
+import { Link } from 'react-router-dom';
+import { Container, Typography } from '@material-ui/core';
 import Input from '../../../../components/Input';
 import firebase from '../../../../firebase/config';
 
@@ -15,7 +16,7 @@ const RegisterForm = (props) => {
     try {
       await firebase.register(name, email, password);
       setIsLogged(true);
-      props.history.push('/gear-list-board');
+      // props.history.push('/gear-list-board');
     } catch (error) {
       console.log(error);
     }
@@ -28,7 +29,10 @@ const RegisterForm = (props) => {
   };
 
   return (
-    <Paper className="AuthForm">
+    <Container maxWidth="md" className="AuthForm">
+      <Typography>
+        If you're already registered <Link to="/login">LogIn</Link>
+      </Typography>
       <form className="form-container" name="auth-form" onSubmit={handleSubmit}>
         <Input
           className="int-auth"
@@ -64,7 +68,7 @@ const RegisterForm = (props) => {
           onClick={register}
         />
       </form>
-    </Paper>
+    </Container>
   );
 };
 

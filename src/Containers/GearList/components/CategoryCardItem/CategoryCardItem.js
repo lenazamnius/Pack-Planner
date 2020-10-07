@@ -2,7 +2,7 @@ import React from 'react';
 import './CategoryCardItem.css';
 import Button from '../../../../components/Button';
 import CheckBox from '../../../../components/CheckBox';
-import capitalize from '../../../../helpers/helpersFunc';
+import { capitalize } from '../../../../helpers/helpersFunc';
 
 const CategoryCardItem = ({
   id,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import { AppBar, Toolbar, IconButton } from '@material-ui/core';
@@ -24,15 +24,14 @@ const useStyles = makeStyles((theme) => ({
 // const NavBar = ({ logged, logOut }) => {
 const NavBar = ({ logged, setIsLogged }) => {
   const classes = useStyles();
-  console.log('from navbar', logged);
 
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <NavLink className={classes.link} to="/">
+          <Link className={classes.link} to="/">
             PackPlanner
-          </NavLink>
+          </Link>
           {logged ? (
             <LoggedNavMenu setIsLogged={setIsLogged} />
           ) : (

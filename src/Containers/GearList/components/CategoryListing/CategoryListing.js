@@ -1,26 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import CategoryCard from '../CategoryCard';
 import Button from '../../../../components/Button';
+import { totalWeight } from '../../../../helpers/helpersFunc';
 import { v4 as uuidv4 } from 'uuid';
 import './CategoryListing.css';
 
 const CategoryListing = ({ gearListData }) => {
-  const initialListData = JSON.parse(
-    window.localStorage.getItem('gearListItems'),
-  );
-  const initialCheckedArr = JSON.parse(
-    window.localStorage.getItem('checkedItems'),
-  );
-  const [gearListItems, setGearListItems] = useState(
-    initialListData || gearListData,
-  );
-  const [checkedItems, setCheckedItems] = useState(initialCheckedArr || []);
-  const [addNewCategoryCard, setAddingNewCategoryCard] = useState(false);
+  // const initialListData = JSON.parse(
+  //   window.localStorage.getItem('gearListItems'),
+  // );
+  // const initialCheckedArr = JSON.parse(
+  //   window.localStorage.getItem('checkedItems'),
+  // );
+  // const [gearListItems, setGearListItems] = useState(
+  //   initialListData || gearListData,
+  // );
+  // const [checkedItems, setCheckedItems] = useState(initialCheckedArr || []);
+  // useEffect(() => {
+  //   window.localStorage.setItem('gearListItems', JSON.stringify(gearListItems));
+  //   window.localStorage.setItem('checkedItems', JSON.stringify(checkedItems));
+  // }, [gearListItems, checkedItems]);
 
-  useEffect(() => {
-    window.localStorage.setItem('gearListItems', JSON.stringify(gearListItems));
-    window.localStorage.setItem('checkedItems', JSON.stringify(checkedItems));
-  }, [gearListItems, checkedItems]);
+  const [gearListItems, setGearListItems] = useState(gearListData);
+  const [checkedItems, setCheckedItems] = useState([]);
+  const [addNewCategoryCard, setAddNewCategoryCard] = useState(false);
 
   const updateQuantity = (itemId, newQty, categoryId) => {
     const categoryIdx = gearListItems.findIndex(
@@ -32,32 +35,6 @@ const CategoryListing = ({ gearListData }) => {
       return listItem.id === itemId ? (listItem.qty = newQty) : listItem;
     });
     setGearListItems(newListItems);
-  };
-
-  const weightArr = gearListItems.map((category) => {
-    return category.list.reduce(
-      (total, item) => total + item.weight * item.qty,
-      0,
-    );
-  });
-
-  const totalWeight = weightArr
-    .reduce((total, item) => total + item, 0)
-    .toFixed(3);
-
-  const addCategoryNewItem = (inputName, inputWeight, inputQty, categoryId) => {
-    const newItemData = {
-      name: inputName.toLowerCase(),
-      id: uuidv4(),
-      weight: Number(inputWeight),
-      qty: Number(inputQty),
-    };
-    const newGearListItems = gearListItems.map((category) => {
-      return category.id === categoryId
-        ? { ...category, list: [...category.list, newItemData] }
-        : { ...category };
-    });
-    setGearListItems(newGearListItems);
   };
 
   const updateGearListData = (id, categoryId) => {
@@ -75,6 +52,21 @@ const CategoryListing = ({ gearListData }) => {
 
     setGearListItems(newGearListItems);
     setCheckedItems(updatedCheckedArr);
+  };
+
+  const addCategoryNewItem = (inputName, inputWeight, inputQty, categoryId) => {
+    const newItemData = {
+      name: inputName.toLowerCase(),
+      id: uuidv4(),
+      weight: Number(inputWeight),
+      qty: Number(inputQty),
+    };
+    const newGearListItems = gearListItems.map((category) => {
+      return category.id === categoryId
+        ? { ...category, list: [...category.list, newItemData] }
+        : { ...category };
+    });
+    setGearListItems(newGearListItems);
   };
 
   const updateItemsAsChecked = (id, packed, categoryId) => {
@@ -101,7 +93,7 @@ const CategoryListing = ({ gearListData }) => {
   };
 
   const addCategory = () => {
-    setAddingNewCategoryCard(true);
+    setAddNewCategoryCard(true);
   };
 
   const deleteCategoryHandler = (categoryId) => {
@@ -112,7 +104,7 @@ const CategoryListing = ({ gearListData }) => {
       (item) => Object.keys(item)[0] !== categoryId,
     );
 
-    setAddingNewCategoryCard(false);
+    setAddNewCategoryCard(false);
     setGearListItems(newGearListItems);
     setCheckedItems(updatedCheckedArr);
   };
@@ -126,7 +118,9 @@ const CategoryListing = ({ gearListData }) => {
           onClick={addCategory}
           disabled={addNewCategoryCard}
         />
-        <p className="TotalListWeight">Total Pack Weight: {totalWeight} kg</p>
+        <p className="TotalListWeight">
+          Total Pack Weight: {gearListItems ? totalWeight(gearListItems) : 0} kg
+        </p>
       </div>
       {addNewCategoryCard && (
         <CategoryCard
@@ -138,24 +132,25 @@ const CategoryListing = ({ gearListData }) => {
           deleteCategoryHandler={deleteCategoryHandler}
         />
       )}
-      {gearListItems.map((categoryData) => {
-        const { id, categoryName, list } = categoryData;
+      {gearListItems &&
+        gearListItems.map((categoryData) => {
+          const { id, categoryName, list } = categoryData;
 
-        return (
-          <CategoryCard
-            id={id}
-            key={id}
-            name={categoryName}
-            categoryListData={list}
-            updateQuantity={updateQuantity}
-            updateGearListData={updateGearListData}
-            addCategoryNewItem={addCategoryNewItem}
-            updateItemsAsChecked={updateItemsAsChecked}
-            updateCheckedItemsArr={updateCheckedItemsArr}
-            deleteCategoryHandler={deleteCategoryHandler}
-          />
-        );
-      })}
+          return (
+            <CategoryCard
+              id={id}
+              key={id}
+              name={categoryName}
+              categoryListData={list}
+              updateQuantity={updateQuantity}
+              updateGearListData={updateGearListData}
+              addCategoryNewItem={addCategoryNewItem}
+              updateItemsAsChecked={updateItemsAsChecked}
+              updateCheckedItemsArr={updateCheckedItemsArr}
+              deleteCategoryHandler={deleteCategoryHandler}
+            />
+          );
+        })}
     </div>
   );
 };

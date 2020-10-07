@@ -3,7 +3,7 @@ import CategoryHeader from '../CategoryHeader';
 import Button from '../../../../components/Button';
 import CategoryCardItem from '../CategoryCardItem';
 import CategoryCardNewItem from '../CategoryCardNewItem';
-import capitalize from '../../../../helpers/helpersFunc';
+import { capitalize } from '../../../../helpers/helpersFunc';
 import {
   selectOptionData,
   selectCategoryData,

@@ -3,7 +3,7 @@ import './CategoryCardNewItem.css';
 import Button from '../../../../components/Button';
 import Input from '../../../../components/Input';
 import Select from '../../../../components/Select';
-import capitalize from '../../../../helpers/helpersFunc';
+import { capitalize } from '../../../../helpers/helpersFunc';
 
 const CategoryCardNewItem = ({
   categoryId,

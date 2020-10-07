@@ -36,6 +36,9 @@ const LoggedNavMenu = (props) => {
       <NavLink className={classes.link} onClick={logOut} to="/login">
         LogOut
       </NavLink>
+      <NavLink className={classes.link} to="/gear-list-board">
+        {firebase.getUserCurrentName()}
+      </NavLink>
     </Box>
   );
 };

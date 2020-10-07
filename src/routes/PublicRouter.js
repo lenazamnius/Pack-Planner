@@ -5,7 +5,6 @@ import RegisterForm from '../containers/Auth/components/RegisterForm';
 import LandingPage from '../containers/LandingPage';
 
 const PublicRouter = ({ setIsLogged }) => {
-  console.log('public router');
   return (
     <div>
       <Switch>
@@ -16,9 +15,7 @@ const PublicRouter = ({ setIsLogged }) => {
         <Route exact path="/signup">
           <RegisterForm setIsLogged={setIsLogged} />
         </Route>
-        {/* <Route component={LoginForm} exact path="/login" /> */}
-        {/* <Route component={RegisterForm} exact path="/signup" /> */}
-        <Redirect to="/" />
+        <Redirect to="/login" />
       </Switch>
     </div>
   );

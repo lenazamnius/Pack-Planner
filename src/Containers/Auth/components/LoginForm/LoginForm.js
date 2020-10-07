@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Paper } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import { Container, Typography } from '@material-ui/core';
 import Input from '../../../../components/Input';
 import firebase from '../../../../firebase/config';
 import './LoginForm.css';
 
-const LoginForm = (props) => {
-  const { setIsLogged } = props;
+const LoginForm = ({ setIsLogged }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -13,7 +13,6 @@ const LoginForm = (props) => {
     try {
       await firebase.login(email, password);
       setIsLogged(true);
-      props.history.replace('/gear-list-board');
     } catch (error) {
       console.log(error);
     }
@@ -26,7 +25,11 @@ const LoginForm = (props) => {
   };
 
   return (
-    <Paper className="AuthForm">
+    <Container maxWidth="md" className="AuthForm">
+      <Typography>
+        If you aren't registered yet <Link to="/signup">SignUp</Link>
+      </Typography>
+
       <form className="form-container" name="auth-form" onSubmit={handleSubmit}>
         <Input
           className="int-auth"
@@ -53,7 +56,7 @@ const LoginForm = (props) => {
           onClick={login}
         />
       </form>
-    </Paper>
+    </Container>
   );
 };
 

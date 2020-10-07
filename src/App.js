@@ -7,21 +7,6 @@ import NavBar from './containers/NavBar';
 import './App.css';
 
 const App = () => {
-  // const [isLogged, setIsLogged] = useState(true);
-
-  // const logOutHandler = () => {
-  //   const newLoggedValue = false;
-
-  //   setIsLogged(newLoggedValue);
-  // };
-
-  // return (
-  //   <Router>
-  //     <NavBar logged={isLogged} logOut={logOutHandler} />
-  //     <RootRouter logged={isLogged} />
-  //   </Router>
-  // );
-
   const [firebaseInitialized, setFirebaseInitialized] = useState();
   const [isLogged, setIsLogged] = useState();
 
@@ -31,14 +16,7 @@ const App = () => {
       setFirebaseInitialized(val);
       setIsLogged(logged);
     });
-    console.log({ firebaseInitialized, isLogged });
   });
-
-  // const logOutHandler = async () => {
-  //   const newLoggedValue = false;
-
-  //   setFirebaseInitialized(newLoggedValue);
-  // };
 
   return firebaseInitialized !== false ? (
     <Router>
