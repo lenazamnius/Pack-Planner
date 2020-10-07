@@ -1,0 +1,21 @@
+.Category {
+  margin-bottom: 10px;
+  border-radius: 3px;
+}
+
+.CategoryTitle {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.CategoryWrapper {
+  border-radius: 5px;
+  padding: 10px 20px 20px 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.categoryFooter {
+  display: flex;
+  flex-direction: row-reverse;
+  padding-top: 20px;
+}

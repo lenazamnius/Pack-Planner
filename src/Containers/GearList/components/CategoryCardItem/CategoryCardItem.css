@@ -1,0 +1,22 @@
+.CategoryCardItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.card-item-col {
+  display: flex;
+  flex-direction: row;
+  width: 20%;
+  margin: 5px 0 10px 0;
+}
+
+.last-column {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.packed {
+  background-color: rgba(250, 128, 114, 0.3);
+}
