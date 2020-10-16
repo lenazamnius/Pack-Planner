@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { CircularProgress, Box } from '@material-ui/core';
 import firebase from './firebase/config';
-import RootRouter from './routes/RootRouter';
-import NavBar from './containers/NavBar';
+import { BrowserRouter as Router } from 'react-router-dom';
+import 'materialize-css/dist/css/materialize.css';
+import 'materialize-css/dist/js/materialize';
 import './App.css';
+import NavBar from './containers/NavBar';
+import LogIn from './containers/Auth/LogIn';
+import SignUp from './containers/Auth/SignUp';
+import LandingPage from './containers/LandingPage';
+import GearList from './containers/GearList/GearList';
+import GearListBoard from './containers/GearListBoard';
+import CreateGearList from './containers/CreateGearList';
 
 const App = () => {
   const [firebaseInitialized, setFirebaseInitialized] = useState();
@@ -18,15 +24,16 @@ const App = () => {
     });
   });
 
-  return firebaseInitialized !== false ? (
-    <Router>
-      <NavBar logged={isLogged} setIsLogged={setIsLogged} />
-      <RootRouter logged={isLogged} setIsLogged={setIsLogged} />
-    </Router>
-  ) : (
-    <Box className="loader">
-      <CircularProgress />
-    </Box>
+  return (
+    <div>
+      <NavBar />
+      <SignUp />
+      <LogIn />
+      <CreateGearList />
+      <LandingPage />
+      <GearListBoard />
+      <GearList />
+    </div>
   );
 };
 
