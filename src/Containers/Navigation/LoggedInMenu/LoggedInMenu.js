@@ -1,32 +1,33 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const LoggedInMenu = () => {
   return (
     <ul className="right hide-on-med-and-down">
       <li>
-        <a href="/home">Home</a>
+        <NavLink to="/">Home</NavLink>
       </li>
       <li>
-        <a href="/gear-list-board">MyGearLists</a>
+        <NavLink to="/gear-list-board">MyGearLists</NavLink>
       </li>
       <li>
-        <a href="/create-gear-list">CreateGearList</a>
+        <NavLink to="/create-gear-list">CreateGearList</NavLink>
       </li>
       <li>
-        <a
+        <NavLink
+          to="/gear-list-board"
           className="btn-floating btn waves-effect waves-light"
-          href="/gear-list-board"
         >
           LZ
-        </a>
+        </NavLink>
       </li>
       <li>
-        <a
-          href="/logout"
+        <NavLink
+          to="/login"
           className="waves-effect waves-light btn deep-orange lighten-3"
         >
           LogOut
-        </a>
+        </NavLink>
       </li>
     </ul>
   );

@@ -1,14 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import LoggedInMenu from '../LoggedInMenu';
 import LoggedOutMenu from '../LoggedOutMenu/LoggedOutMenu';
 
 const NavBar = () => {
   return (
-    <nav className="blue-grey">
-      <div className="nav-wrapper container">
-        <a href="/home" className="brand-logo">
+    <nav className="nav-wrapper blue-grey">
+      <div className="container">
+        <Link to="/" className="brand-logo">
           PackPlaner
-        </a>
+        </Link>
         <LoggedInMenu />
         <LoggedOutMenu />
       </div>

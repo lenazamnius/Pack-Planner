@@ -1,23 +1,24 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const LoggedOutMenu = () => {
   return (
     <ul className="right hide-on-med-and-down">
       <li>
-        <a href="/home">Home</a>
+        <NavLink to="/">Home</NavLink>
       </li>
       <li>
-        <a href="/login" className="waves-effect waves-light btn">
+        <NavLink to="/login" className="waves-effect waves-light btn">
           LogIn
-        </a>
+        </NavLink>
       </li>
       <li>
-        <a
-          href="/signup"
+        <NavLink
+          to="/signup"
           className="waves-effect waves-light btn deep-purple lighten-2"
         >
           SignUp
-        </a>
+        </NavLink>
       </li>
     </ul>
   );

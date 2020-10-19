@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const LandingPage = () => {
   return (
@@ -10,12 +11,12 @@ const LandingPage = () => {
         quibusdam aliquid nemo obcaecati sunt ea pariatur vel aperiam,
         consequuntur cum voluptatum doloremque!
       </p>
-      <a
-        href="/create-gear-list"
+      <Link
+        to="/create-gear-list"
         className="waves-effect waves-light btn-large"
       >
         Let's pack for hike
-      </a>
+      </Link>
     </div>
   );
 };
