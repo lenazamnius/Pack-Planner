@@ -6,14 +6,13 @@ const LogIn = () => {
   const { register, handleSubmit, reset, errors } = useForm();
   const onSubmit = (data) => {
     console.log(data);
-
     reset();
   };
 
   return (
     <div className="row container">
       <form
-        className="col s12 m10 xl6 offset-m1 offset-xl3  semitransparent-container"
+        className="col s12 m10 xl6 offset-m1 offset-xl3 semitransparent-container"
         onSubmit={handleSubmit(onSubmit)}
       >
         <p className="center-align mb">
@@ -43,9 +42,9 @@ const LogIn = () => {
             <div className="error-message">You must specify a password.</div>
           )}
         </div>
-        <div className="input-field col s12">
+        <div className="input-field col s12  center-align row">
           <button
-            className="btn-large waves-effect waves-light"
+            className="btn-large waves-effect waves-light col s12"
             type="submit"
             name="action"
           >
@@ -55,39 +54,6 @@ const LogIn = () => {
       </form>
     </div>
   );
-  // return (
-  //   <div className="row container semitransparent-container">
-  //     <p className="center-align">
-  //       If you haven't register yet <Link to="/signup">SignUp</Link>
-  //     </p>
-  //     <form className="col s12">
-  //       <div className="row">
-  //         <div className="input-field col s12">
-  //           <input id="email" type="email" className="validate" required />
-  //           <label htmlFor="email">Email</label>
-  //         </div>
-  //       </div>
-  //       <div className="row">
-  //         <div className="input-field col s12">
-  //           <input
-  //             id="password"
-  //             type="password"
-  //             className="validate"
-  //             required
-  //           />
-  //           <label htmlFor="password">Password</label>
-  //         </div>
-  //       </div>
-  //       <button
-  //         className="btn-large waves-effect waves-light"
-  //         type="submit"
-  //         name="action"
-  //       >
-  //         LogIn
-  //       </button>
-  //     </form>
-  //   </div>
-  // );
 };
 
 export default LogIn;

@@ -3,10 +3,9 @@ import { useForm } from 'react-hook-form';
 import M from 'materialize-css';
 
 const CreateGearList = () => {
-  const { register, handleSubmit, reset, errors } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
     console.log(data);
-
     reset();
   };
 

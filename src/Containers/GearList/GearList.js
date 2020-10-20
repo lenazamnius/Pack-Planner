@@ -3,10 +3,10 @@ import { useParams } from 'react-router';
 
 const GearList = () => {
   const { id } = useParams();
+
   return (
     <div className="container semitransparent-container">
       <h4>Here will be your GearList {id}</h4>
-
       <ul className="collapsible">
         <li className="collection active">
           <div className="category-header">

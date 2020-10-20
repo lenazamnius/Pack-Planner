@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import firebase from './firebase/config';
+// import firebase from './firebase/config';
 import LogIn from './containers/Auth/LogIn';
 import SignUp from './containers/Auth/SignUp';
 import LandingPage from './containers/LandingPage';
@@ -13,16 +13,16 @@ import 'materialize-css/dist/js/materialize';
 import './App.css';
 
 const App = () => {
-  const [firebaseInitialized, setFirebaseInitialized] = useState();
-  const [isLogged, setIsLogged] = useState();
+  // const [firebaseInitialized, setFirebaseInitialized] = useState();
+  // const [isLogged, setIsLogged] = useState();
 
-  useEffect(() => {
-    firebase.isInitialized().then((val) => {
-      const logged = !!val;
-      setFirebaseInitialized(val);
-      setIsLogged(logged);
-    });
-  });
+  // useEffect(() => {
+  //   firebase.isInitialized().then((val) => {
+  //     const logged = !!val;
+  //     setFirebaseInitialized(val);
+  //     setIsLogged(logged);
+  //   });
+  // });
 
   return (
     <Router>

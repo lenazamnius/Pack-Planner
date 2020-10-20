@@ -35,12 +35,11 @@ const SignUp = () => {
   });
   const onSubmit = (data) => {
     console.log(data);
-
     reset();
   };
 
   return (
-    <div className="row container valign-wrapper">
+    <div className="row container">
       <form
         className="col s12 m10 xl8 offset-m1 offset-xl2 semitransparent-container"
         onSubmit={handleSubmit(onSubmit)}
@@ -88,7 +87,7 @@ const SignUp = () => {
             </div>
           )}
         </div>
-        <div className="input-field col s12">
+        <div className="input-field col s12  center-align">
           <button
             className="btn-large waves-effect waves-light"
             type="submit"
