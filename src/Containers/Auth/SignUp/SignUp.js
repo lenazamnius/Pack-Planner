@@ -89,7 +89,7 @@ const SignUp = () => {
         </div>
         <div className="input-field col s12  center-align">
           <button
-            className="btn-large waves-effect waves-light"
+            className="btn-large waves-effect waves-light col s12"
             type="submit"
             name="action"
           >

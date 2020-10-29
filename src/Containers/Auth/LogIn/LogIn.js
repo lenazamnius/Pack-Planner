@@ -1,11 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { logIn } from '../../../store/actions/authActions';
 
 const LogIn = () => {
   const { register, handleSubmit, reset, errors } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
+  const dispatch = useDispatch();
+  const error = useSelector((state) => {
+    return state.auth.authError;
+  });
+
+  const onSubmit = (credentials) => {
+    dispatch(logIn(credentials));
     reset();
   };
 
@@ -48,9 +56,10 @@ const LogIn = () => {
             type="submit"
             name="action"
           >
-            SignUp
+            login
           </button>
         </div>
+        <div className="red-text center">{error && <p>{error}</p>}</div>
       </form>
     </div>
   );

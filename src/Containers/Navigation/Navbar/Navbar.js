@@ -4,12 +4,13 @@ import LoggedInMenu from '../LoggedInMenu';
 import LoggedOutMenu from '../LoggedOutMenu/LoggedOutMenu';
 import LoggedInSideMenu from '../LoggedInSideMenu/LoggedInSideMenu';
 import LoggedOutSideMenu from '../LoggedOutSideMenu/LoggedOutSideMenu';
+import { useSelector } from 'react-redux';
 import M from 'materialize-css';
 
 const NavBar = () => {
-  useEffect(() => {
-    M.AutoInit();
-  }, []);
+  const logged = useSelector((state) => state.firebase.auth);
+
+  useEffect(() => M.AutoInit());
 
   return (
     <div>
@@ -21,12 +22,10 @@ const NavBar = () => {
           <a href="/" data-target="mobile-demo" className="sidenav-trigger">
             <i className="material-icons">menu</i>
           </a>
-          <LoggedInMenu />
-          <LoggedOutMenu />
+          {logged.uid ? <LoggedInMenu /> : <LoggedOutMenu />}
         </div>
       </nav>
-      <LoggedInSideMenu />
-      <LoggedOutSideMenu />
+      {logged.uid ? <LoggedInSideMenu /> : <LoggedOutSideMenu />}
     </div>
   );
 };

@@ -13,7 +13,7 @@ const LoggedOutSideMenu = () => {
           <div className="px">
             <NavLink
               to="/login"
-              className="waves-effect waves-light btn-flat white-text"
+              className="sidenav-close waves-effect waves-light btn-flat white-text"
             >
               LogIn
             </NavLink>
@@ -21,7 +21,7 @@ const LoggedOutSideMenu = () => {
         </div>
       </li>
       <li>
-        <NavLink to="/">
+        <NavLink to="/" className="sidenav-close">
           <i className="material-icons">home</i> Home
         </NavLink>
       </li>
@@ -31,7 +31,7 @@ const LoggedOutSideMenu = () => {
       <li className="px">
         <NavLink
           to="/signup"
-          className="waves-effect waves-light btn deep-purple lighten-2"
+          className="sidenav-close waves-effect waves-light btn-small deep-purple lighten-2"
         >
           SignUp
         </NavLink>

@@ -1,7 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const LandingPage = () => {
+  const logged = useSelector((state) => state.firebase.auth);
+
   return (
     <div className="container semitransparent-container">
       <h2>Hello to new PackPlanner user!</h2>
@@ -12,7 +15,7 @@ const LandingPage = () => {
         consequuntur cum voluptatum doloremque!
       </p>
       <Link
-        to="/create-gear-list"
+        to={logged.uid ? '/create-gear-list' : '/login'}
         className="waves-effect waves-light btn-large"
       >
         Let's pack for hike

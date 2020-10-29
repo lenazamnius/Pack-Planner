@@ -1,5 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { logOut } from '../../../store/actions/authActions';
 import image from '../../../data/images/mountain.jpg';
 
 const LoggedInSideMenu = () => {
@@ -7,6 +9,10 @@ const LoggedInSideMenu = () => {
     name: 'Lena Zamnius',
     email: 'lena.zamnius@gamail.com',
   };
+
+  const dispatch = useDispatch();
+  const handleLogOut = () => dispatch(logOut());
+
   return (
     <ul className="sidenav" id="mobile-demo">
       <li>
@@ -23,17 +29,17 @@ const LoggedInSideMenu = () => {
         </div>
       </li>
       <li>
-        <NavLink to="/">
+        <NavLink to="/" className="sidenav-close">
           <i className="material-icons">home</i> Home
         </NavLink>
       </li>
       <li>
-        <NavLink to="/gear-list-board">
+        <NavLink to="/gear-list-board" className="sidenav-close">
           <i className="material-icons">dashboard</i> MyGearLists
         </NavLink>
       </li>
       <li>
-        <NavLink to="/create-gear-list">
+        <NavLink to="/create-gear-list" className="sidenav-close">
           <i className="material-icons">add</i> CreateGearList
         </NavLink>
       </li>
@@ -43,7 +49,8 @@ const LoggedInSideMenu = () => {
       <li>
         <NavLink
           to="/login"
-          className="waves-effect waves-light btn-small deep-orange lighten-3"
+          onClick={handleLogOut}
+          className="sidenav-close waves-effect waves-light btn-small deep-orange lighten-3"
         >
           LogOut
         </NavLink>

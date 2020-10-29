@@ -1,61 +1,82 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router';
+import { useSelector } from 'react-redux';
+import { firestoreConnect } from 'react-redux-firebase';
+import { capitalize } from '../../helpers/helpersFunc';
+import M from 'materialize-css';
 
 const GearList = () => {
   const { id } = useParams();
+  useEffect(() => M.AutoInit());
 
-  return (
-    <div className="container semitransparent-container">
-      <h4>Here will be your GearList {id}</h4>
-      <ul className="collapsible">
-        <li className="collection active">
-          <div className="category-header">
-            <div className="collapsible-header">
-              <span className="collapsible-header-item">
-                <i className="material-icons">list</i>First Category Name{' '}
-              </span>
-              <span className="collapsible-header-item">
-                <div className="waves-effect expand">
-                  <i className="material-icons expand">keyboard_arrow_up</i>
-                </div>
-              </span>
-            </div>
-            <div className="waves-effect waves-red btn-delete">
-              <i className="material-icons">clear</i>
-            </div>
-          </div>
-          <div className="collapsible-body">
-            <div className="collection-item">
-              first item{' '}
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </div>
-            <div className="collection-item">
-              second item{' '}
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </div>
-            <div className="collection-item">
-              third item{' '}
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </div>
-            <div className="collection-item">
-              <div className="waves-effect waves-light btn">
-                <i className="material-icons left">add</i>Add New Item
+  const listData = useSelector((state) => {
+    const lists = state.firestore.data.gearLists;
+    const listInfo = lists ? lists[id] : null;
+
+    return listInfo;
+  });
+
+  if (listData) {
+    return (
+      <div className="container semitransparent-container">
+        <h4>{capitalize(listData.title)}</h4>
+        <p>Here will be your GearList {id}</p>
+        <ul className="collapsible">
+          <li className="collection active">
+            <div className="category-header">
+              <div className="collapsible-header">
+                <span className="collapsible-header-item">
+                  <i className="material-icons">list</i>First Category Name{' '}
+                </span>
+                <span className="collapsible-header-item">
+                  <div className="waves-effect expand">
+                    <i className="material-icons expand">keyboard_arrow_up</i>
+                  </div>
+                </span>
+              </div>
+              <div className="waves-effect waves-red btn-delete">
+                <i className="material-icons">clear</i>
               </div>
             </div>
-          </div>
-        </li>
-      </ul>
-    </div>
-  );
+            <div className="collapsible-body">
+              <div className="collection-item">
+                first item{' '}
+                <label>
+                  <input type="checkbox" />
+                  <span></span>
+                </label>
+              </div>
+              <div className="collection-item">
+                second item{' '}
+                <label>
+                  <input type="checkbox" />
+                  <span></span>
+                </label>
+              </div>
+              <div className="collection-item">
+                third item{' '}
+                <label>
+                  <input type="checkbox" />
+                  <span></span>
+                </label>
+              </div>
+              <div className="collection-item">
+                <div className="waves-effect waves-light btn">
+                  <i className="material-icons left">add</i>Add New Item
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    );
+  } else {
+    return (
+      <div className="container semitransparent-container">
+        <h4>Page is loading...</h4>
+      </div>
+    );
+  }
 };
 
-export default GearList;
+export default firestoreConnect([{ collection: 'gearLists' }])(GearList);

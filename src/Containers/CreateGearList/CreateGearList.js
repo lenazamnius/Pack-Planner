@@ -1,17 +1,18 @@
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { createGearList } from '../../store/actions/gearListActions';
 import M from 'materialize-css';
 
 const CreateGearList = () => {
+  useEffect(() => M.AutoInit(), []);
   const { register, handleSubmit, reset } = useForm();
+  const dispatch = useDispatch();
+
   const onSubmit = (data) => {
-    console.log(data);
+    dispatch(createGearList(data));
     reset();
   };
-
-  useEffect(() => {
-    M.AutoInit();
-  }, []);
 
   return (
     <div className="row container semitransparent-container">
@@ -27,44 +28,46 @@ const CreateGearList = () => {
           <input
             type="text"
             name="startDate"
+            placeholder="Start date"
             className="datepicker"
             ref={register}
           />
-          <label htmlFor="date">Start Date</label>
+          {/* <label htmlFor="date">Start Date</label> */}
         </div>
         <div className="input-field col s6">
           <input
             type="text"
             name="endDate"
+            placeholder="End date"
             className="datepicker"
             ref={register}
           />
-          <label htmlFor="date">End Date</label>
+          {/* <label htmlFor="date">End Date</label> */}
         </div>
 
         <div className="input-field col s12 l4">
           <select id="type" name="type" defaultValue="" ref={register}>
             <option value="" disabled>
-              Choose travel type
+              Travel type
             </option>
             <option value="foot">on foot</option>
             <option value="bicycle">by bicycle</option>
             <option value="skies">by skies</option>
             <option value="kayak">by kayak</option>
           </select>
-          <label htmlFor="type">Travel Type</label>
+          {/* <label htmlFor="type">Travel Type</label> */}
         </div>
         <div className="input-field col s12 l4">
           <select id="season" name="season" defaultValue="" ref={register}>
             <option value="" disabled>
-              Choose season
+              Season
             </option>
             <option value="summer">Summer</option>
             <option value="autumn">Autumn</option>
             <option value="winter">Winter</option>
             <option value="spring">Spring</option>
           </select>
-          <label htmlFor="season">Season</label>
+          {/* <label htmlFor="season">Season</label> */}
         </div>
         <div className="input-field col s12 l4">
           <select
@@ -74,7 +77,7 @@ const CreateGearList = () => {
             ref={register}
           >
             <option value="" disabled>
-              Choose landscape
+              Landscape
             </option>
             <option value="mountains">Mountains</option>
             <option value="woodland">Woodland</option>
@@ -82,7 +85,7 @@ const CreateGearList = () => {
             <option value="rivers">Rivers</option>
             <option value="combined">Combined</option>
           </select>
-          <label htmlFor="landscape">Landscape</label>
+          {/* <label htmlFor="landscape">Landscape</label> */}
         </div>
 
         <div className="input-field col s12">
@@ -96,7 +99,7 @@ const CreateGearList = () => {
         </div>
         <div className="input-field col s12">
           <button
-            className="btn waves-effect waves-light"
+            className="btn waves-effect waves-light right btn-width"
             type="submit"
             name="action"
           >

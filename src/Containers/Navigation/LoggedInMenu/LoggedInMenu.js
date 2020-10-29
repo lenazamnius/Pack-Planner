@@ -1,7 +1,12 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { logOut } from '../../../store/actions/authActions';
 
 const LoggedInMenu = () => {
+  const dispatch = useDispatch();
+  const handleLogOut = () => dispatch(logOut());
+
   return (
     <ul className="right hide-on-med-and-down">
       <li>
@@ -24,6 +29,7 @@ const LoggedInMenu = () => {
       <li>
         <NavLink
           to="/login"
+          onClick={handleLogOut}
           className="waves-effect waves-light btn deep-orange lighten-3"
         >
           LogOut
