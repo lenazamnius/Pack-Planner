@@ -1,0 +1,22 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400);
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* background: linear-gradient(0deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)), url(./data/images/michal-parzuchowski-mountain.jpg); */
+  background-size: cover;
+  background-color:rgba(96, 125, 139, 0.6);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
