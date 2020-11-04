@@ -7,13 +7,13 @@ const LoggedOutSideMenu = () => {
     <ul className="sidenav" id="mobile-demo">
       <li>
         <div className="user-view blue-grey">
-          <div>
+          <div className="pl">
             <img className="circle" src={avatar} alt="no user avatar" />
           </div>
           <div className="px">
             <NavLink
               to="/login"
-              className="sidenav-close waves-effect waves-light btn-flat white-text"
+              className="sidenav-close waves-effect waves-light btn-flat white-text btn-sidenav-login"
             >
               LogIn
             </NavLink>

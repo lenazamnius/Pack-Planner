@@ -1,9 +1,12 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { logOut } from '../../../store/actions/authActions';
 
 const LoggedInMenu = () => {
+  const userData = useSelector((state) => {
+    return state.firebase.profile.name;
+  });
   const dispatch = useDispatch();
   const handleLogOut = () => dispatch(logOut());
 
@@ -23,7 +26,7 @@ const LoggedInMenu = () => {
           to="/gear-list-board"
           className="btn-floating btn waves-effect waves-light"
         >
-          LZ
+          {userData && userData[0]}
         </NavLink>
       </li>
       <li>

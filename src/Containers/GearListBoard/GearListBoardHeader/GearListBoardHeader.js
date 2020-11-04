@@ -3,9 +3,8 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const GearListBoardHeader = () => {
-  const gearLists = useSelector((state) => state.gearLists.gearLists);
+  const gearLists = useSelector((state) => state.firestore.ordered.userLists);
   const gearListsCount = gearLists ? gearLists.length : '0';
-  // console.log(gearLists);
 
   return (
     <div className="gear-list-board-header">

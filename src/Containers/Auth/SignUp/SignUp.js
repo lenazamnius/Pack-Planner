@@ -1,40 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { useSelector, useDispatch } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-
-const SignupSchema = yup.object().shape({
-  name: yup
-    .string()
-    .required('You must specify a name.')
-    .matches(/^\D*$/i, 'The name must not have numbers.')
-    .min(2, 'The name must be at least 2 characters.'),
-  email: yup.string().required('You must specify an email.').email(),
-  newPassword: yup
-    .string()
-    .required('You must specify a password.')
-    .matches(
-      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{1,}$/i,
-      'Your password must be have at least 1 uppercase, 1 lowercase character and 1 number.',
-    )
-    .min(8, 'The password must be at least 8 characters long.'),
-  confirmPassword: yup
-    .string()
-    .required('Password confirmation required.')
-    .oneOf(
-      [yup.ref('newPassword'), null],
-      "The confirmation password doesn't match.",
-    ),
-});
+import SignUpSchema from '../../../helpers/SignUpSchema';
+import { signUp } from '../../../store/actions/authActions';
 
 const SignUp = () => {
+  const dispatch = useDispatch();
+  const error = useSelector((state) => state.auth.authError);
   const { register, handleSubmit, reset, errors } = useForm({
     mode: 'onChange',
-    resolver: yupResolver(SignupSchema),
+    resolver: yupResolver(SignUpSchema),
   });
-  const onSubmit = (data) => {
-    console.log(data);
+
+  const onSubmit = (newUser) => {
+    dispatch(signUp(newUser));
     reset();
   };
 
@@ -45,7 +26,10 @@ const SignUp = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <p className="center-align mb">
-          If you're already registered <Link to="/login">LogIn</Link>
+          If you're already registered{' '}
+          <Link to="/login" className="teal-text">
+            LogIn
+          </Link>
         </p>
         <div className="input-field col s12 l6">
           <label htmlFor="name">Name</label>
@@ -95,6 +79,9 @@ const SignUp = () => {
           >
             SignUp
           </button>
+        </div>
+        <div className="deep-orange-text text-darken-3 center">
+          {error && <p>{error}</p>}
         </div>
       </form>
     </div>

@@ -8,7 +8,9 @@ import { useSelector } from 'react-redux';
 import M from 'materialize-css';
 
 const NavBar = () => {
-  const logged = useSelector((state) => state.firebase.auth);
+  const logged = useSelector((state) => {
+    return state.firebase.auth;
+  });
 
   useEffect(() => M.AutoInit());
 

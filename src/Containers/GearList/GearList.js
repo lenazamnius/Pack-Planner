@@ -5,22 +5,27 @@ import { firestoreConnect } from 'react-redux-firebase';
 import { capitalize } from '../../helpers/helpersFunc';
 import M from 'materialize-css';
 
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+
 const GearList = () => {
   const { id } = useParams();
-  useEffect(() => M.AutoInit());
-
   const listData = useSelector((state) => {
     const lists = state.firestore.data.gearLists;
     const listInfo = lists ? lists[id] : null;
-
     return listInfo;
   });
+
+  useEffect(() => M.AutoInit());
 
   if (listData) {
     return (
       <div className="container semitransparent-container">
-        <h4>{capitalize(listData.title)}</h4>
-        <p>Here will be your GearList {id}</p>
+        <h4>TITLE: {capitalize(listData.title)}</h4>
+        <p>
+          At {listData.season} {listData.landscape}
+        </p>
+        <p>List id - {id}</p>
         <ul className="collapsible">
           <li className="collection active">
             <div className="category-header">
@@ -73,7 +78,7 @@ const GearList = () => {
   } else {
     return (
       <div className="container semitransparent-container">
-        <h4>Page is loading...</h4>
+        <h4 className="px">Page is loading...</h4>
       </div>
     );
   }

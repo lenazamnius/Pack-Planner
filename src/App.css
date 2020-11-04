@@ -11,8 +11,20 @@
   padding: 1rem 0;
 }
 
+.pl {
+  padding-left: 10px;
+}
+
 .btn-width {
   min-width: 22%;
+}
+
+.btn-delete {
+  margin-right: 10px;
+}
+
+.btn-sidenav-login {
+  text-decoration: underline;
 }
 
 .semitransparent-container,
@@ -50,7 +62,6 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:active  {
     /* -webkit-box-shadow: 0 0 0 30px #bfd4d9 inset !important; */
     -webkit-box-shadow: 0 0 0 30px #a6b8bf inset !important;
-    /* -webkit-text-fill-color:#fff !important; */
 }
 
 ::placeholder { 
@@ -103,10 +114,6 @@ textarea.materialize-textarea {
   display: flex;
   align-items: center;
   font-size: 1.5rem;
-}
-
-.btn-delete {
-  margin-right: 10px;
 }
 
 .sidenav li > a.btn-small {

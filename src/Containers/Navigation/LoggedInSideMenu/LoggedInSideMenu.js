@@ -1,14 +1,14 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { logOut } from '../../../store/actions/authActions';
+import { capitalize } from '../../../helpers/helpersFunc';
 import image from '../../../data/images/mountain.jpg';
 
 const LoggedInSideMenu = () => {
-  const userData = {
-    name: 'Lena Zamnius',
-    email: 'lena.zamnius@gamail.com',
-  };
+  const userData = useSelector((state) => {
+    return state.firebase.profile;
+  });
 
   const dispatch = useDispatch();
   const handleLogOut = () => dispatch(logOut());
@@ -21,7 +21,7 @@ const LoggedInSideMenu = () => {
             <img className="circle" src={image} alt="user" />
           </div>
           <div>
-            <span className="white-text name">{userData.name}</span>
+            <span className="white-text name">{capitalize(userData.name)}</span>
           </div>
           <div>
             <span className="white-text email">{userData.email}</span>
@@ -46,7 +46,7 @@ const LoggedInSideMenu = () => {
       <li>
         <div className="divider"></div>
       </li>
-      <li>
+      <li className="px">
         <NavLink
           to="/login"
           onClick={handleLogOut}

@@ -1,16 +1,19 @@
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { createGearList } from '../../store/actions/gearListActions';
 import M from 'materialize-css';
 
-const CreateGearList = () => {
-  useEffect(() => M.AutoInit(), []);
-  const { register, handleSubmit, reset } = useForm();
+const CreateGearList = (props) => {
+  const history = useHistory();
   const dispatch = useDispatch();
+  const { register, handleSubmit, reset } = useForm();
+  useEffect(() => M.AutoInit(), []);
 
   const onSubmit = (data) => {
     dispatch(createGearList(data));
+    history.push('/gear-list-board');
     reset();
   };
 

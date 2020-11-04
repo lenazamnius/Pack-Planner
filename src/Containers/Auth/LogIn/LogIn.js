@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { logIn } from '../../../store/actions/authActions';
 
 const LogIn = () => {
@@ -24,7 +23,10 @@ const LogIn = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <p className="center-align mb">
-          If you haven't register yet <Link to="/signup">SignUp</Link>
+          If you haven't register yet{' '}
+          <Link to="/signup" className="teal-text">
+            SignUp
+          </Link>
         </p>
         <div className="input-field col s12">
           <label htmlFor="email">Email</label>
@@ -59,7 +61,9 @@ const LogIn = () => {
             login
           </button>
         </div>
-        <div className="red-text center">{error && <p>{error}</p>}</div>
+        <div className="deep-orange-text text-darken-3 center">
+          {error && <p>{error}</p>}
+        </div>
       </form>
     </div>
   );
