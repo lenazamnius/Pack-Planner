@@ -1,4 +1,4 @@
-export const selectOptionData = {
+export const packCategoryOptions = {
   shelter: [
     'select item',
     'tent',
@@ -113,7 +113,7 @@ export const selectOptionData = {
     'top',
     'bottom',
   ],
-  'first AID': [
+  firstAid: [
     'select item',
     'antiseptic wipes',
     'antibiotic cream',
@@ -151,7 +151,7 @@ export const selectOptionData = {
   consumables: ['select item', 'fuel', 'duct tape', 'food', 'water'],
 };
 
-export const selectCategoryData = [
+export const packCategories = [
   'select category',
   'pack',
   'shelter',
@@ -169,4 +169,26 @@ export const selectCategoryData = [
   'storage',
   'survival',
   'technical equipment',
+];
+
+export const travelTypeOptions = [
+  { id: 'foot', value: 'on Foot' },
+  { id: 'bicycle', value: 'on Bicycle' },
+  { id: 'skies', value: 'by Ski' },
+  { id: 'kayak', value: 'on Kayak' },
+];
+
+export const seasonOptions = [
+  { id: 'summer', value: 'Summer' },
+  { id: 'autumn', value: 'Autumn' },
+  { id: 'winter', value: 'Winter' },
+  { id: 'spring', value: 'Spring' },
+];
+
+export const landscapeOptions = [
+  { id: 'mountains', value: 'Mountains' },
+  { id: 'woodland', value: 'Woodland' },
+  { id: 'plain', value: 'Plain' },
+  { id: 'rivers', value: 'Rivers' },
+  { id: 'combined', value: 'Combined' },
 ];

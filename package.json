@@ -7,6 +7,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "connected-react-router": "^6.8.0",
     "firebase": "^7.22.1",
     "materialize-css": "^1.0.0-rc.2",
     "react": "^16.13.1",
@@ -26,8 +27,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "netlify": "npm run build && netlify deploy --prod"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"

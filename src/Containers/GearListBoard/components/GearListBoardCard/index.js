@@ -1,20 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { deleteGearList } from '../../../store/actions/gearListActions';
-import image from '../../../data/images/paul-gilmore-mountains.jpg';
-import { capitalize } from '../../../helpers/helpersFunc';
+import { deleteGearList } from '../../../../store/actions/gearListActions';
+import image from '../../../../data/images/paul-gilmore-mountains.jpg';
+import { capitalize } from '../../../../helpers/helpersFunc';
 
 const GearListBoardCard = ({ data }) => {
   const dispatch = useDispatch();
 
   return (
-    // <Link to={`/gear-list/${data.id}`}>
     <div className="col s12 m6 l4">
       <div className="card">
         <div className="card-image">
           <img src={image} alt="mountains" className="image-overlay" />
-          <span className="card-title">{capitalize(data.title)}</span>
+          <Link to={`/gear-list/${data.id}`} className="card-title">
+            {capitalize(data.title)}
+          </Link>
+          {/* <span className="card-title">{capitalize(data.title)}</span> */}
           <div
             onClick={() => dispatch(deleteGearList(data.id))}
             className="btn-floating halfway-fab waves-effect waves-light deep-orange lighten-3"
@@ -27,6 +29,7 @@ const GearListBoardCard = ({ data }) => {
             {data.startDate} - {data.endDate}
           </p>
           <p>12 items</p>
+          <p>id: {data.id}</p>
           <Link
             to={`/gear-list/${data.id}`}
             className="waves-effect waves-light btn-large teal lighten-2 mt"
@@ -36,7 +39,6 @@ const GearListBoardCard = ({ data }) => {
         </div>
       </div>
     </div>
-    // </Link>
   );
 };
 

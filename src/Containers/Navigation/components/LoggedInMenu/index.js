@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { logOut } from '../../../store/actions/authActions';
+import { logOut } from '../../../../store/actions/authActions';
 
 const LoggedInMenu = () => {
   const userData = useSelector((state) => {

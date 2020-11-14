@@ -1,9 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { logOut } from '../../../store/actions/authActions';
-import { capitalize } from '../../../helpers/helpersFunc';
-import image from '../../../data/images/mountain.jpg';
+import { logOut } from '../../../../store/actions/authActions';
+import { capitalize } from '../../../../helpers/helpersFunc';
+import image from '../../../../data/images/mountain.jpg';
 
 const LoggedInSideMenu = () => {
   const userData = useSelector((state) => {

@@ -64,6 +64,12 @@ input:-webkit-autofill:active  {
     -webkit-box-shadow: 0 0 0 30px #a6b8bf inset !important;
 }
 
+.input-field input:not(.browser-default),
+input:-internal-autofill-selected,
+textarea {
+  color: #424242;
+}
+
 ::placeholder { 
   color: #424242;
   opacity: 1;

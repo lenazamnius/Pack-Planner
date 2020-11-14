@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import LogIn from './containers/Auth/LogIn';
+import GearList from './containers/GearList';
 import SignUp from './containers/Auth/SignUp';
 import PublicRoute from './routes/PublicRoute';
 import PrivateRoute from './routes/PrivateRoute';
 import LandingPage from './containers/LandingPage';
 import NavBar from './containers/Navigation/Navbar';
-import GearList from './containers/GearList/GearList';
 import GearListBoard from './containers/GearListBoard';
 import CreateGearList from './containers/CreateGearList';
 import 'materialize-css/dist/css/materialize.css';
