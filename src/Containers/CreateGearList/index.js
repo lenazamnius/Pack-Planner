@@ -13,7 +13,7 @@ import {
 import M from 'materialize-css';
 
 const CreateGearList = () => {
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, reset, getValues } = useForm();
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -25,22 +25,27 @@ const CreateGearList = () => {
     reset();
   };
 
+  const onBlurHandle = () => {
+    const data = getValues('title');
+    console.log(data);
+  };
+
   return (
     <div className="row container semitransparent-container">
       <form className="col s12" onSubmit={handleSubmit(onSubmit)}>
-        <h4>General pack information</h4>
-
         <div className="input-field col s12">
           <RenderInput
             id="title"
             name="title"
+            onBlurHandle={onBlurHandle}
+            // defaultValue="test"
             ref={register}
             autoComplete="off"
           />
           <label htmlFor="title">Pack Title</label>
         </div>
 
-        <div className="input-field col s6">
+        <div className="input-field col s12 m6">
           <RenderInput
             name="startDate"
             placeholder="Start date"
@@ -48,7 +53,7 @@ const CreateGearList = () => {
             ref={register}
           />
         </div>
-        <div className="input-field col s6">
+        <div className="input-field col s12 m6">
           <RenderInput
             name="endDate"
             placeholder="End date"
@@ -100,7 +105,7 @@ const CreateGearList = () => {
             type="submit"
             name="action"
           >
-            Save Pack Info
+            Create Gear List
           </button>
         </div>
       </form>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useFirestoreConnect } from 'react-redux-firebase';
+import RenderPreloader from '../../components/RenderPreloader';
 import GearListBoardCard from './components/GearListBoardCard';
 import GearListBoardHeader from './components/GearListBoardHeader';
 
@@ -14,22 +15,16 @@ const GearListBoard = () => {
       collection: 'users',
       doc: userId,
       subcollections: [{ collection: 'gearListing' }],
-      storeAs: 'userLists',
+      storeAs: 'allUserLists',
     },
   ]);
 
   const gearLists = useSelector(({ firestore: { ordered } }) => {
-    return ordered && ordered.userLists;
+    return ordered && ordered.allUserLists;
   });
 
   if (!gearLists) {
-    return (
-      <div className="container semitransparent-container">
-        <div className="row px">
-          <h4>Page is loading..</h4>
-        </div>
-      </div>
-    );
+    return <RenderPreloader />;
   }
   if (gearLists.length === 0) {
     return (

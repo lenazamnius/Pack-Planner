@@ -1,8 +1,26 @@
 export const deleteGearList = (id) => {
-  return (dispatch, getState) => {
-    // make async call to db
-    // console.log('deleted list with id: ', id, 'from actions');
-    dispatch({ type: 'DELETE_GEAR_LIST', gearListId: id });
+  return (dispatch, getState, { getFirebase }) => {
+    const firestore = getFirebase().firestore();
+    const userId = getState().firebase.auth.uid;
+
+    firestore
+      .collection('gearLists')
+      .doc(id)
+      .delete()
+      .then(() => {
+        return firestore
+          .collection('users')
+          .doc(userId)
+          .collection('gearListing')
+          .doc(id)
+          .delete();
+      })
+      .then(() => {
+        dispatch({ type: 'DELETE_GEAR_LIST', gearListId: id });
+      })
+      .catch((error) => {
+        dispatch({ type: 'DELETE_GEAR_LIST_ERROR', error });
+      });
   };
 };
 
@@ -21,7 +39,7 @@ export const createGearList = (listData) => {
         createdAt: new Date(),
       })
       .then((res) => {
-        const listId = res.w_.path.segments[1];
+        const listId = res.id;
 
         return firestore
           .collection('users')

@@ -3,11 +3,13 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const GearListBoardHeader = () => {
-  const gearLists = useSelector((state) => state.firestore.ordered.userLists);
+  const gearLists = useSelector(
+    ({ firestore: { ordered } }) => ordered.allUserLists,
+  );
   const gearListsCount = gearLists ? gearLists.length : '0';
 
   return (
-    <div className="gear-list-board-header">
+    <div className="gl-board-header">
       <h5>
         You have {gearListsCount} pack{gearListsCount === 1 ? '' : 's'}
       </h5>
