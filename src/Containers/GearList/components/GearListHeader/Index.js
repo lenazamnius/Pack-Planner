@@ -1,19 +1,18 @@
 import React from 'react';
+import IconButton from '../../../../components/Buttons/IconButton';
 import { capitalize } from '../../../../helpers/helpersFunc';
 
 const GearListHeader = ({ headerData }) => {
   return (
     <div className="mb">
       <div className="row">
-        <div className="col s12 l7 push-l5 gl-header-bar">
-          <div className="waves-effect waves-light btn-flat btn-small">
+        <div className="col s12 l4 push-l8 gl-header-bar">
+          <div className="waves-effect waves-teal btn-flat btn-small gl-header-save-btn">
             Save title
           </div>
-          <div className="waves-effect waves-light btn-flat btn-small ml">
-            <i className="material-icons">clear</i>
-          </div>
+          <IconButton />
         </div>
-        <h4 className="col s12 l5 pull-l7">{capitalize(headerData.title)}</h4>
+        <h4 className="col s12 l8 pull-l4">{capitalize(headerData.title)}</h4>
       </div>
 
       <div className="row">

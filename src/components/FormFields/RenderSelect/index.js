@@ -1,9 +1,14 @@
 import React from 'react';
 
 const RenderSelect = React.forwardRef(
-  ({ label, options, defaultValue = '', ...rest }, ref) => {
+  ({ label, options, defaultValue = '', onChangeHandle, ...rest }, ref) => {
     return (
-      <select defaultValue={defaultValue} {...rest} ref={ref}>
+      <select
+        defaultValue={defaultValue}
+        {...rest}
+        ref={ref}
+        onChange={onChangeHandle}
+      >
         <option value="" disabled>
           {label}
         </option>
