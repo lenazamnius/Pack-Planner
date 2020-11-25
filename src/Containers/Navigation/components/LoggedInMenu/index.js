@@ -1,14 +1,23 @@
 import React from 'react';
+import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { NavLink } from 'react-router-dom';
 import { logOut } from '../../../../store/actions/authActions';
+import { createGearList } from '../../../../store/actions/gearListActions';
+import { v4 as uuidv4 } from 'uuid';
+import './LoggedInMenu.css';
 
 const LoggedInMenu = () => {
-  const userData = useSelector((state) => {
-    return state.firebase.profile.name;
-  });
+  const history = useHistory();
   const dispatch = useDispatch();
+  const userData = useSelector((state) => state.firebase.profile.name);
+
   const handleLogOut = () => dispatch(logOut());
+
+  const handleCreateList = () => {
+    const newListId = uuidv4();
+
+    dispatch(createGearList(newListId, history));
+  };
 
   return (
     <ul className="right hide-on-med-and-down">
@@ -19,7 +28,7 @@ const LoggedInMenu = () => {
         <NavLink to="/gear-list-board">MyGearLists</NavLink>
       </li>
       <li>
-        <NavLink to="/create-gear-list">CreateGearList</NavLink>
+        <div onClick={handleCreateList}>CreateGearList</div>
       </li>
       <li>
         <NavLink

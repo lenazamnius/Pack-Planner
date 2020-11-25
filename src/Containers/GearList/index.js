@@ -7,25 +7,36 @@ import RenderPreloader from '../../components/RenderPreloader';
 import GearListBody from './components/GearListBody';
 
 const GearList = () => {
-  const { id } = useParams();
+  const { id: listId } = useParams();
 
   useFirestoreConnect([
     {
       collection: 'gearLists',
-      doc: id,
-      storeAs: 'openedList',
+      doc: listId,
+      storeAs: 'openedListData',
+    },
+    {
+      collection: `gearLists/${listId}/categoryListing`,
+      storeAs: 'categoriesData',
     },
   ]);
 
   const listData = useSelector(({ firestore: { data } }) => {
-    return data && data.openedList;
+    return data && data.openedListData;
   });
 
-  if (listData) {
+  const categoryListing = useSelector(({ firestore: { ordered } }) => {
+    return ordered && ordered.categoriesData;
+  });
+
+  if (listData && categoryListing) {
     return (
       <div className="container mt">
         <GearListHeader headerData={listData} />
-        <GearListBody />
+        <GearListBody
+          listUnit={listData.unit}
+          categoryListing={categoryListing}
+        />
       </div>
     );
   } else {

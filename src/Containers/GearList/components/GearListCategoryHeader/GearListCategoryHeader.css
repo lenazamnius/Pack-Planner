@@ -1,0 +1,55 @@
+.gl-category-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.gl-category-title {
+  padding: 0 1rem 0.3px 1.5rem;
+}
+
+.collapsible-header-item {
+  display: flex;
+  align-items: center;
+  font-size: 1.7rem;
+}
+
+.collapsible-header-item .collapsible-header {
+  padding: 0;
+  border: none;
+  align-items: center;
+}
+
+.collapsible-header i {
+  width: 3rem;
+}
+
+.expand.collapsible-header {
+  margin-right: 0.3rem;
+  background: none;
+}
+
+.material-icons.expand {
+  margin-right: 0;
+}
+
+.gl-category-header .select-wrapper input.select-dropdown {
+  margin: 0;
+  padding-left: .75rem;
+  font-size: 1.6rem;
+  font-family: "Montserrat";
+  border-bottom: none;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.gl-category-header .select-wrapper input.select-dropdown:focus {
+  border-bottom: none;
+  background-color: rgba(0,0,0,.05);
+}
+
+.gl-category-header .select-wrapper .caret {
+  display: none;
+}

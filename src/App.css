@@ -31,48 +31,7 @@
   display: flex;
 }
 
-/* ========== buttons ========= */
-
-.btn-width {
-  min-width: 22%;
-}
-
-.btn-sidenav-login {
-  text-decoration: underline;
-}
-
-.gl-header-save-btn,
-.gl-del-btn i {
-  font-weight: bold;
-}
-
-.gl-header-save-btn:hover,
-.gl-del-btn i:hover {
-  color: white;
-}
-
-.gl-add-item-btn,
-.gl-add-item-btn i {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color:#00695c;
-}
-
-.gl-add-category-btn,
-.gl-add-category-btn i {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #4527a0;
-}
-
-.gl-add-item-btn:hover *,
-.gl-add-category-btn:hover *,
-.gl-add-item-btn:hover,
-.gl-add-category-btn:hover {
-  color: white;
-}
-
-/* =========== others =========== */
+/* ========== Common ========== */
 
 .semitransparent-container,
 .row .col.semitransparent-container {
@@ -82,70 +41,38 @@
   background-color:rgba(224, 247, 250, 0.1);
 }
 
-.gl-board-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 0.75rem 1rem 0.75rem;
-}
-
-.gl-header-bar {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.gl-body-bar {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.75rem;
-}
-
-.gl-category-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.75rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  background: rgba(0, 0, 0, 0.05);
-}
-
-.gl-category-title {
-  padding: 0 1rem;
-}
-
-.collapsible-header-item {
-  display: flex;
-  align-items: center;
-  font-size: 1.7rem;
-}
-
-.gl-category-item {
-  display: flex;
-  justify-content: space-between;
-}
-
-.gl-category-item.row {
-  margin-bottom: 0;
-}
-
-.gl-category-item .last-col {
-  display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-    padding: 0;
-}
-
-.gl-category-footer {
-  padding: 1rem 0;
-}
-
 .error-message {
   font-size: 0.95rem;
   color: #F44336;
 }
 
+ul {
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
 
-/* ============ Materialized Styles ============ */
+.divider {
+  margin-bottom: 1rem;
+}
+
+/* ============= inputs ============== */
+
+::placeholder { 
+  color: #424242;
+  opacity: 1;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
@@ -161,37 +88,6 @@ textarea {
   color: #424242;
 }
 
-::placeholder { 
-  color: #424242;
-  opacity: 1;
-}
-
-ul {
-  margin-block-start: 0;
-  margin-block-end: 0;
-}
-
-.divider {
-  margin-bottom: 1rem;
-}
-
-.btn,
-.btn-large,
-.btn-small,
-.collapsible {
-  box-shadow: none;
-}
-
-.card {
-  min-width: 240px;
-  min-height: 350px;
-}
-
-.card-image {
-  min-height: 136px;
-  background: #00695c;
-}
-
 .input-field label {
   color: #424242;
 }
@@ -201,45 +97,21 @@ textarea.materialize-textarea {
   border-bottom: 1px solid  #424242;
 }
 
-.image-overlay {
-  object-fit: cover;
-  opacity: 0.55;
-}
+/* ========== buttons ========= */
 
-.sidenav li > a.btn-small {
-  margin: 10px 35px;
-}
+/* .btn-width {
+  min-width: 22%;
+} */
 
-.collapsible {
-  margin: 0;
-  border: none;
-}
-
-.collapsible-header {
-  align-items: center;
-  padding: 0;
-  background: none;
-  border: none;
-}
-
-.collapsible-header i {
-  width: 3rem;
-}
-
-.collapsible-body {
-  border: none;
-}
-
-.expand {
-  margin-right: 0.3rem;
-}
-
-.waves-effect.waves-purple-custom .waves-ripple  {
-  background-color: rgba(69, 39, 160, .75);
-}
-
-.waves-effect.waves-orange-custom .waves-ripple {
+/* .waves-effect.waves-orange-custom .waves-ripple {
   background-color: rgba(255, 171, 145, .75);
+} */
+
+.btn,
+.btn-large,
+.btn-small,
+.collapsible {
+  box-shadow: none;
 }
 
 .btn-small:hover {
@@ -251,29 +123,8 @@ textarea.materialize-textarea {
   color: rgba(0, 0, 0, 0.25) !important;
 }
 
-.material-icons.delete,
-.material-icons.expand {
-  margin-right: 0;
-}
-
-/* ======== select ======== */
-
-.gl-category-header .select-wrapper input.select-dropdown {
-  margin: 0 0 4px 0;
-  padding-left: 10px;
-  font-size: 1.6rem;
-  font-family: "Montserrat";
-  /* color: rgba(0, 0, 0, 0.25); */
-  border-bottom: none;
-}
-
-.gl-category-header .select-wrapper input.select-dropdown:focus {
-  border-bottom: none;
-  background-color: rgba(0,0,0,.05);
-}
-
-.gl-category-header .select-wrapper .caret {
-  display: none;
+.sidenav li > a.btn-small {
+  margin: 10px 35px;
 }
 
 

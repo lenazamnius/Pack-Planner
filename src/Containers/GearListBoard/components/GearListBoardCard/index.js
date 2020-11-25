@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { deleteGearList } from '../../../../store/actions/gearListActions';
 import image from '../../../../data/images/paul-gilmore-mountains.jpg';
 import { capitalize } from '../../../../helpers/helpersFunc';
+import './GearListBoardCard.css';
 
 const GearListBoardCard = ({ data }) => {
   const dispatch = useDispatch();
@@ -29,7 +30,6 @@ const GearListBoardCard = ({ data }) => {
             {data.startDate} - {data.endDate}
           </p>
           <p>12 items</p>
-          <p>id: {data.id}</p>
           <Link
             to={`/gear-list/${data.id}`}
             className="waves-effect waves-light btn-large teal lighten-2 mt"

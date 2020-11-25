@@ -1,0 +1,25 @@
+.btn-flat.gl-add-item-btn,
+.btn-flat.gl-add-item-btn i {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color:#00695c;
+}
+
+.btn-flat.gl-add-item-btn:hover *,
+.btn-flat.gl-add-item-btn:hover {
+  color: white;
+}
+
+.gl-category-footer {
+  padding: 1rem 0;
+}
+
+.gl-category.collapsible {
+  margin: 0;
+  border: none;
+}
+
+.gl-category .collapsible-body {
+  padding: 2rem 0 2rem 1rem;
+  border: none;
+}

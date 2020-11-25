@@ -8,7 +8,6 @@ import PrivateRoute from './routes/PrivateRoute';
 import LandingPage from './containers/LandingPage';
 import NavBar from './containers/Navigation/Navbar';
 import GearListBoard from './containers/GearListBoard';
-import CreateGearList from './containers/CreateGearList';
 import 'materialize-css/dist/css/materialize.css';
 import 'materialize-css/dist/js/materialize';
 import M from 'materialize-css';
@@ -29,9 +28,6 @@ const App = () => {
           <PublicRoute path="/login">
             <LogIn />
           </PublicRoute>
-          <PrivateRoute path="/create-gear-list">
-            <CreateGearList />
-          </PrivateRoute>
           <PrivateRoute path="/gear-list-board">
             <GearListBoard />
           </PrivateRoute>

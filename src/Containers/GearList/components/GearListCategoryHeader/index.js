@@ -5,7 +5,7 @@ import { useFirestore } from 'react-redux-firebase';
 import IconButton from '../../../../components/Buttons/IconButton';
 import RenderSelect from '../../../../components/FormFields/RenderSelect';
 import { packCategories } from '../../../../data/selectData';
-import { capitalize } from '../../../../helpers/helpersFunc';
+import './GearListCategoryHeader.css';
 
 const GearListCategoryHeader = ({
   title,
@@ -50,7 +50,7 @@ const GearListCategoryHeader = ({
   const onChangeHandle = () => {
     const title = getValues('categoryName');
 
-    updateCategoryHeader(capitalize(title));
+    updateCategoryHeader(title);
     setCategoryName(title);
     setAddItemBtn(false);
   };
@@ -66,7 +66,7 @@ const GearListCategoryHeader = ({
             name="categoryName"
             options={packCategories}
             defaultValue={title && title}
-            label={!title ? 'select category' : ''}
+            label={!title ? 'Select Category' : ''}
             onChangeHandle={onChangeHandle}
           />
         }

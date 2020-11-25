@@ -3,10 +3,10 @@ const initState = {};
 const gearListsReducer = (state = initState, action) => {
   switch (action.type) {
     case 'CREATE_GEAR_LIST':
-      console.log('create list from reducer');
+      console.log('create list from reducer', action.gearListId);
       return state;
     case 'DELETE_GEAR_LIST':
-      console.log('delete list from reducer');
+      console.log('delete list from reducer', action.gearListId);
       return state;
     case 'CREATE_GEAR_LIST_ERROR':
       console.log(action.error);

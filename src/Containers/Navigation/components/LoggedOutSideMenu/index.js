@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import avatar from '../../../../data/images/avatar.png';
+import './LoggedOutSideMenu.css';
 
 const LoggedOutSideMenu = () => {
   return (

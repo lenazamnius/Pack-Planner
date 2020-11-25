@@ -1,17 +1,25 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { logOut } from '../../../../store/actions/authActions';
 import { capitalize } from '../../../../helpers/helpersFunc';
+import { logOut } from '../../../../store/actions/authActions';
+import { createGearList } from '../../../../store/actions/gearListActions';
 import image from '../../../../data/images/mountain.jpg';
+import { v4 as uuidv4 } from 'uuid';
+import './LoggedInSideMenu.css';
 
 const LoggedInSideMenu = () => {
-  const userData = useSelector((state) => {
-    return state.firebase.profile;
-  });
-
+  const history = useHistory();
   const dispatch = useDispatch();
+  const userData = useSelector((state) => state.firebase.profile);
+
   const handleLogOut = () => dispatch(logOut());
+
+  const handleCreateList = () => {
+    const newListId = uuidv4();
+
+    dispatch(createGearList(newListId, history));
+  };
 
   return (
     <ul className="sidenav" id="mobile-demo">
@@ -39,9 +47,9 @@ const LoggedInSideMenu = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink to="/create-gear-list" className="sidenav-close">
+        <div onClick={handleCreateList} className="sidenav-close">
           <i className="material-icons">add</i> CreateGearList
-        </NavLink>
+        </div>
       </li>
       <li>
         <div className="divider"></div>

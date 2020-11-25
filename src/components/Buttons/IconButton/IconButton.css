@@ -1,0 +1,11 @@
+.gl-del-btn i {
+  font-weight: bold;
+}
+
+.gl-del-btn i:hover {
+  color: white;
+}
+
+.waves-effect.waves-orange-custom .waves-ripple {
+  background-color: rgba(255, 171, 145, .75);
+}

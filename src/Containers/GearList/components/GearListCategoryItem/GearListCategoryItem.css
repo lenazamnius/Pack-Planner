@@ -1,0 +1,57 @@
+.gl-category-item.row {
+  display: flex;
+  margin-bottom: 0;
+}
+
+.gl-category-item.row .col {
+  display: flex;
+  align-items: center;
+}
+
+.gl-category-item .first-col {
+  padding: 0 0.75rem 0 0;
+}
+
+.gl-category-item .last-col {
+  justify-content: flex-end;
+  padding: 0;
+}
+
+
+.last-col [type="checkbox"] + span:not(.lever) {
+  margin-top: 6px;
+  padding-left: 26px;
+}
+
+.gl-category-item input[type=number]:not(.browser-default) {
+  width: 44px;
+  height: 1.5rem;
+  margin: 0 4px 0 0;
+  font-size: 1.1rem;
+  text-align: center;
+  border-bottom: none;
+}
+
+.gl-category-item input[type=number]:not(.browser-default):focus:not([readonly]) {
+  box-shadow: 0 0 0 0.2rem #4db6ac;
+  border-radius: 2px;
+  border: none;
+}
+
+.gl-category-item .select-wrapper input.select-dropdown {
+  height: 1.5rem;
+  margin: 0;
+  padding: 0.5rem 0 0.5rem 0.5rem;
+  font-size: 1rem;
+  font-family: "Montserrat";
+  border-bottom: none;
+}
+
+.gl-category-item .select-wrapper input.select-dropdown:focus {
+  border-bottom: none;
+  background-color: rgba(0,0,0,.05);
+}
+
+.gl-category-item  .select-wrapper .caret{
+  display: none;
+}
