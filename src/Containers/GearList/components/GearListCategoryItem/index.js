@@ -15,71 +15,126 @@ const GearListCategoryItem = ({
   categoryId,
   categoryName,
 }) => {
-  const { id: itemId, name, weight, qty } = itemData;
-  const options = packCategoryOptions[categoryName];
   const firestore = useFirestore();
-  const { id: listId } = useParams();
   const { register, getValues } = useForm();
-  const userId = useSelector((state) => state.firebase.auth);
-  const [itemWeight, setItemWeight] = useState(weight);
+  const options = packCategoryOptions[categoryName];
 
-  const updateItem = (value, itemId, listId) => {
-    return firestore
-      .collection('gearLists')
-      .doc(listId)
+  const userId = useSelector((state) => state.firebase.auth);
+  const { id: itemId, name, weight, qty } = itemData;
+  const { id: listId } = useParams();
+  const [curWeight, setCurWeight] = useState(weight);
+  const [curQty, setCurQty] = useState(qty);
+
+  const listRef = firestore.collection('gearLists').doc(listId);
+  const userListRef = firestore
+    .collection('users')
+    .doc(userId.uid)
+    .collection('gearListing')
+    .doc(listId);
+
+  const updateItemName = (name, itemId, catId) => {
+    return listRef
       .collection('categoryListing')
-      .doc(categoryId)
+      .doc(catId)
       .collection('items')
       .doc(itemId)
-      .update(value)
+      .update({ name })
       .then(() => {
-        if (value.weight) {
-          return firestore
-            .collection('users')
-            .doc(userId.uid)
-            .collection('gearListing')
-            .doc(listId)
-            .update({
-              totalWeight: firestore.FieldValue.increment(Number(value.weight)),
-            });
-        }
-      })
-      .then(() => {
-        console.log('Item successfully updated!');
+        console.log('Item Name successfully updated!');
       })
       .catch((error) => {
-        console.error('Error updating item: ', error);
+        console.error('Error updating Item Name: ', error);
       });
   };
 
-  const deleteItem = () => {
-    return firestore
-      .collection('gearLists')
-      .doc(listId)
+  const nameOnChangeHandle = () => {
+    const newName = getValues('itemName');
+
+    updateItemName(newName, itemId, categoryId);
+  };
+  // ================================================================
+  const updateItemWeight = (newWeight, difWeight, itemId, catId) => {
+    return listRef
       .collection('categoryListing')
-      .doc(categoryId)
+      .doc(catId)
+      .collection('items')
+      .doc(itemId)
+      .update({ weight: newWeight })
+      .then(() => {
+        return listRef.update({
+          totalWeight: firestore.FieldValue.increment(Number(difWeight)),
+        });
+      })
+      .then(() => {
+        console.log('Item Weight successfully updated!');
+      })
+      .catch((error) => {
+        console.error('Error updating Item Weight: ', error);
+      });
+  };
+
+  const weightOnBlurHandle = () => {
+    const newWeight = getValues('itemWeight');
+    const difWeight = (newWeight - curWeight) * curQty;
+
+    setCurWeight(newWeight);
+    updateItemWeight(newWeight, difWeight, itemId, categoryId);
+  };
+  // ================================================================
+  const updateItemCount = (newQty, difQty, difWeight, itemId, catId) => {
+    return listRef
+      .collection('categoryListing')
+      .doc(catId)
+      .collection('items')
+      .doc(itemId)
+      .update({ qty: newQty })
+      .then(() => {
+        return listRef.update({
+          itemsCount: firestore.FieldValue.increment(Number(difQty)),
+          totalWeight: firestore.FieldValue.increment(Number(difWeight)),
+        });
+      })
+      .then(() => {
+        return userListRef.update({
+          itemsCount: firestore.FieldValue.increment(Number(difQty)),
+        });
+      })
+      .then(() => {
+        console.log('Count items successfully updated!');
+      })
+      .catch((error) => {
+        console.error('Error updating Count items: ', error);
+      });
+  };
+
+  const countOnBlurHandle = () => {
+    const newQty = getValues('itemCount');
+    const difQty = newQty - curQty;
+    const difWeight = difQty * curWeight;
+
+    setCurQty(newQty);
+    updateItemCount(newQty, difQty, difWeight, itemId, categoryId);
+  };
+
+  // =========================================================
+
+  const deleteItem = (qty, weight, catId, itemId) => {
+    return listRef
+      .collection('categoryListing')
+      .doc(catId)
       .collection('items')
       .doc(itemId)
       .delete()
       .then(() => {
-        return firestore
-          .collection('gearLists')
-          .doc(listId)
-          .collection('categoryListing')
-          .doc(categoryId)
-          .update({
-            totalWeight: firestore.FieldValue.increment(-1),
-          });
+        return listRef.update({
+          itemsCount: firestore.FieldValue.increment(-qty),
+          totalWeight: firestore.FieldValue.increment(-weight),
+        });
       })
       .then(() => {
-        return firestore
-          .collection('users')
-          .doc(userId.uid)
-          .collection('gearListing')
-          .doc(listId)
-          .update({
-            itemsCount: firestore.FieldValue.increment(-Number(itemWeight)),
-          });
+        return userListRef.update({
+          itemsCount: firestore.FieldValue.increment(-qty),
+        });
       })
       .then(() => {
         console.log('Item successfully deleted!');
@@ -89,23 +144,10 @@ const GearListCategoryItem = ({
       });
   };
 
-  const onChangeHandle = () => {
-    const name = getValues('itemName');
+  const delOnClickHandle = () => {
+    const totalWeight = curQty * curWeight;
 
-    updateItem({ name }, itemId, listId);
-  };
-
-  const weightOnBlurHandle = () => {
-    const weight = getValues('itemWeight');
-
-    setItemWeight(weight);
-    updateItem({ weight }, itemId, listId);
-  };
-
-  const countOnBlurHandle = () => {
-    const qty = getValues('itemCount');
-
-    updateItem({ qty }, itemId, listId);
+    deleteItem(curQty, totalWeight, categoryId, itemId);
   };
 
   return (
@@ -113,12 +155,11 @@ const GearListCategoryItem = ({
       <div className="col s4 m6 first-col">
         <RenderSelect
           ref={register}
-          id="itemName"
           name="itemName"
           options={options}
           defaultValue={name && name}
           label={!name ? 'Select Item' : ''}
-          onChangeHandle={onChangeHandle}
+          onChangeHandle={nameOnChangeHandle}
         />
       </div>
       <div className="col s3 m2 df num-input">
@@ -127,21 +168,19 @@ const GearListCategoryItem = ({
           step=".001"
           type="number"
           ref={register}
-          id="itemWeight"
           name="itemWeight"
-          defaultValue={itemWeight && itemWeight}
+          defaultValue={curWeight && curWeight}
           onBlurHandle={weightOnBlurHandle}
         />
         <span>{listUnit}</span>
       </div>
       <div className="col s3 m2 df num-input">
         <RenderInput
-          min="0"
+          min="1"
           ref={register}
           type="number"
-          id="itemCount"
           name="itemCount"
-          defaultValue={qty && qty}
+          defaultValue={curQty && curQty}
           onBlurHandle={countOnBlurHandle}
         />
         <span>items</span>
@@ -151,7 +190,7 @@ const GearListCategoryItem = ({
           <input type="checkbox" />
           <span></span>
         </label>
-        <IconButton onClickHandle={deleteItem} />
+        <IconButton onClickHandle={delOnClickHandle} />
       </div>
     </div>
   );

@@ -7,6 +7,7 @@ import { capitalize } from '../../../../helpers/helpersFunc';
 import './GearListBoardCard.css';
 
 const GearListBoardCard = ({ data }) => {
+  const { id, itemsCount, title, startDate, endDate } = data;
   const dispatch = useDispatch();
 
   return (
@@ -14,12 +15,11 @@ const GearListBoardCard = ({ data }) => {
       <div className="card">
         <div className="card-image">
           <img src={image} alt="mountains" className="image-overlay" />
-          <Link to={`/gear-list/${data.id}`} className="card-title">
-            {capitalize(data.title)}
+          <Link to={`/gear-list/${id}`} className="card-title">
+            {capitalize(title)}
           </Link>
-          {/* <span className="card-title">{capitalize(data.title)}</span> */}
           <div
-            onClick={() => dispatch(deleteGearList(data.id))}
+            onClick={() => dispatch(deleteGearList(id))}
             className="btn-floating halfway-fab waves-effect waves-light deep-orange lighten-3"
           >
             <i className="material-icons">clear</i>
@@ -27,11 +27,13 @@ const GearListBoardCard = ({ data }) => {
         </div>
         <div className="card-content">
           <p>
-            {data.startDate} - {data.endDate}
+            {startDate} - {endDate}
           </p>
-          <p>12 items</p>
+          <p>
+            {itemsCount} item{itemsCount === 1 ? '' : 's'}
+          </p>
           <Link
-            to={`/gear-list/${data.id}`}
+            to={`/gear-list/${id}`}
             className="waves-effect waves-light btn-large teal lighten-2 mt"
           >
             <i className="material-icons right">keyboard_arrow_right</i>watch

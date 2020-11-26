@@ -28,7 +28,9 @@ const LoggedInMenu = () => {
         <NavLink to="/gear-list-board">MyGearLists</NavLink>
       </li>
       <li>
-        <div onClick={handleCreateList}>CreateGearList</div>
+        <div className="gl-nav-element" onClick={handleCreateList}>
+          CreateGearList
+        </div>
       </li>
       <li>
         <NavLink

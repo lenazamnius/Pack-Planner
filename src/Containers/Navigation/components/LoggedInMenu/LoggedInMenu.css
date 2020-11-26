@@ -1,4 +1,4 @@
-ul li div {
+ul li div.gl-nav-element {
   display: block;
   padding: 0 15px;
   font-size: 1rem;
@@ -7,6 +7,6 @@ ul li div {
   transition: background-color .3s;
 }
 
-nav ul div:hover {
+nav ul div.gl-nav-element:hover {
   background-color: rgba(0, 0, 0, 0.1);
 }

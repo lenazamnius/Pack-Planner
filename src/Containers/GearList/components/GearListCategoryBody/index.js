@@ -28,7 +28,8 @@ const GearListCategoryBody = ({ categoryData = {}, listUnit }) => {
   });
 
   const addCategoryNewItem = () => {
-    const categoryNewItem = { name: '', weight: 0, qty: 0 };
+    const categoryNewItem = { name: '', weight: 0, qty: 1 };
+
     return firestore
       .collection('gearLists')
       .doc(listId)
@@ -36,14 +37,6 @@ const GearListCategoryBody = ({ categoryData = {}, listUnit }) => {
       .doc(categoryId)
       .collection('items')
       .add(categoryNewItem)
-      .then(() => {
-        return firestore
-          .collection('gearLists')
-          .doc(listId)
-          .collection('categoryListing')
-          .doc(categoryId)
-          .update({ itemsCount: firestore.FieldValue.increment(1) });
-      })
       .then(() => {
         return firestore
           .collection('gearLists')

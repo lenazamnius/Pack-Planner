@@ -178,7 +178,6 @@ const GearListHeader = ({ headerData }) => {
         <div className="col s11 gl-header-title">
           <RenderInput
             ref={register}
-            id="title"
             name="title"
             placeholder={!title ? 'Enter title' : null}
             defaultValue={title && title}
@@ -198,7 +197,6 @@ const GearListHeader = ({ headerData }) => {
               <div className="input-field inline">
                 <RenderInput
                   ref={register}
-                  id="startDate"
                   name="startDate"
                   className="datepicker"
                   defaultValue={startDate && startDate}
@@ -211,7 +209,6 @@ const GearListHeader = ({ headerData }) => {
               <div className="input-field inline">
                 <RenderInput
                   ref={register}
-                  id="endDate"
                   name="endDate"
                   className="datepicker"
                   defaultValue={endDate && endDate}
@@ -227,7 +224,6 @@ const GearListHeader = ({ headerData }) => {
               <div className="input-field inline">
                 <RenderSelect
                   ref={register}
-                  id="season"
                   name="season"
                   options={seasonOptions}
                   defaultValue={season && season}
@@ -241,7 +237,6 @@ const GearListHeader = ({ headerData }) => {
               <div className="input-field inline">
                 <RenderSelect
                   ref={register}
-                  id="type"
                   name="type"
                   options={travelTypeOptions}
                   defaultValue={type && type}
@@ -255,7 +250,6 @@ const GearListHeader = ({ headerData }) => {
               <div className="input-field inline">
                 <RenderSelect
                   ref={register}
-                  id="landscape"
                   name="landscape"
                   options={landscapeOptions}
                   defaultValue={landscape && landscape}
@@ -269,7 +263,6 @@ const GearListHeader = ({ headerData }) => {
           <div className="row">
             <div className="col s12 gl-header-description">
               <textarea
-                id="description"
                 name="description"
                 className="materialize-textarea"
                 placeholder={!description ? 'Enter description' : null}
@@ -281,9 +274,12 @@ const GearListHeader = ({ headerData }) => {
           </div>
         </div>
         <div className="col s12 l4 gl-statistics">
-          <p>Here will be gear list statistics</p>
-          <p>Total weight: {0} kg</p>
-          <p>Items: {0}</p>
+          <h5>List Statistics</h5>
+          <p>
+            Total weight: {totalWeight ? totalWeight.toFixed(3) : 0}{' '}
+            {unit && unit}
+          </p>
+          <p>Items: {itemsCount ? itemsCount : 0}</p>
         </div>
         <div className="col s12 gl-header-footer">
           <TextIconButton
