@@ -1,10 +1,14 @@
 import React from 'react';
 import { useParams } from 'react-router';
+import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import { useFirestore } from 'react-redux-firebase';
 import IconButton from '../../../../components/Buttons/IconButton';
 import RenderSelect from '../../../../components/FormFields/RenderSelect';
 import { packCategories } from '../../../../data/selectData';
+import {
+  deleteCategory,
+  updateCategoryHeader,
+} from '../../../../store/actions/gearListActions';
 import './GearListCategoryHeader.css';
 
 const GearListCategoryHeader = ({
@@ -13,44 +17,14 @@ const GearListCategoryHeader = ({
   setAddItemBtn,
   setCategoryName,
 }) => {
-  const { id } = useParams();
-  const firestore = useFirestore();
+  const dispatch = useDispatch();
+  const { id: listId } = useParams();
   const { register, getValues } = useForm();
-
-  const updateCategoryHeader = (titleName) => {
-    return firestore
-      .collection('gearLists')
-      .doc(id)
-      .collection('categoryListing')
-      .doc(categoryId)
-      .update({ title: titleName })
-      .then(() => {
-        console.log('Category successfully updated!');
-      })
-      .catch((error) => {
-        console.error('Error removing document: ', error);
-      });
-  };
-
-  const deleteCategory = () => {
-    return firestore
-      .collection('gearLists')
-      .doc(id)
-      .collection('categoryListing')
-      .doc(categoryId)
-      .delete()
-      .then(() => {
-        console.log('Category successfully deleted!');
-      })
-      .catch((error) => {
-        console.error('Error removing document: ', error);
-      });
-  };
 
   const onChangeHandle = () => {
     const title = getValues('categoryName');
 
-    updateCategoryHeader(title);
+    dispatch(updateCategoryHeader(title, categoryId, listId));
     setCategoryName(title);
     setAddItemBtn(false);
   };
@@ -75,7 +49,9 @@ const GearListCategoryHeader = ({
         <div className="waves-effect btn-flat expand collapsible-header">
           <i className="material-icons expand">keyboard_arrow_up</i>
         </div>
-        <IconButton onClickHandle={deleteCategory} />
+        <IconButton
+          onClickHandle={() => dispatch(deleteCategory(listId, categoryId))}
+        />
       </div>
     </div>
   );

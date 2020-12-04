@@ -29,6 +29,7 @@
 
 .df {
   display: flex;
+  align-items: center;
 }
 
 /* ========== Common ========== */
@@ -60,6 +61,12 @@ ul {
 ::placeholder { 
   color: #424242;
   opacity: 1;
+}
+
+input,
+input:not(.browser-default),
+textarea.materialize-textarea {
+  font-family: "Montserrat";
 }
 
 /* Chrome, Safari, Edge, Opera */

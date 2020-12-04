@@ -2,6 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { createGearList } from '../../store/actions/gearListActions';
+import book from '../../routes/book';
 import { v4 as uuidv4 } from 'uuid';
 
 const LandingPage = () => {
@@ -15,7 +16,7 @@ const LandingPage = () => {
     if (logged.uid) {
       dispatch(createGearList(newListId, history));
     } else {
-      history.push('/login');
+      history.push(`${book.login}`);
     }
   };
 

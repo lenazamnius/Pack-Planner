@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router';
-import { useSelector } from 'react-redux';
+import { actionTypes } from 'redux-firestore';
+import { useSelector, useDispatch } from 'react-redux';
 import { useFirestoreConnect } from 'react-redux-firebase';
 import GearListHeader from './components/GearListHeader/Index';
 import RenderPreloader from '../../components/RenderPreloader';
@@ -8,6 +9,7 @@ import GearListBody from './components/GearListBody';
 
 const GearList = () => {
   const { id: listId } = useParams();
+  const dispatch = useDispatch();
 
   useFirestoreConnect([
     {
@@ -17,6 +19,7 @@ const GearList = () => {
     },
     {
       collection: `gearLists/${listId}/categoryListing`,
+      orderBy: 'createdAt',
       storeAs: 'categoriesData',
     },
   ]);
@@ -28,6 +31,12 @@ const GearList = () => {
   const categoryListing = useSelector(({ firestore: { ordered } }) => {
     return ordered && ordered.categoriesData;
   });
+
+  useEffect(() => {
+    return () => {
+      dispatch({ type: actionTypes.CLEAR_DATA });
+    };
+  }, [dispatch]);
 
   if (listData && categoryListing) {
     return (

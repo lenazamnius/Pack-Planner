@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import avatar from '../../../../data/images/avatar.png';
+import book from '../../../../routes/book';
 import './LoggedOutSideMenu.css';
 
 const LoggedOutSideMenu = () => {
@@ -13,7 +14,7 @@ const LoggedOutSideMenu = () => {
           </div>
           <div className="px">
             <NavLink
-              to="/login"
+              to={book.login}
               className="sidenav-close waves-effect waves-light btn-flat white-text btn-sidenav-login"
             >
               LogIn
@@ -22,7 +23,7 @@ const LoggedOutSideMenu = () => {
         </div>
       </li>
       <li>
-        <NavLink to="/" className="sidenav-close">
+        <NavLink to={book.home} className="sidenav-close">
           <i className="material-icons">home</i> Home
         </NavLink>
       </li>
@@ -31,7 +32,7 @@ const LoggedOutSideMenu = () => {
       </li>
       <li className="px">
         <NavLink
-          to="/signup"
+          to={book.signup}
           className="sidenav-close waves-effect waves-light btn-small deep-purple lighten-2"
         >
           SignUp

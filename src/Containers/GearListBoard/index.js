@@ -1,11 +1,13 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { actionTypes } from 'redux-firestore';
+import { useSelector, useDispatch } from 'react-redux';
 import { useFirestoreConnect } from 'react-redux-firebase';
 import RenderPreloader from '../../components/RenderPreloader';
 import GearListBoardCard from './components/GearListBoardCard';
 import GearListBoardHeader from './components/GearListBoardHeader';
 
 const GearListBoard = () => {
+  const dispatch = useDispatch();
   const userId = useSelector(({ firebase: { auth } }) => {
     return auth && auth.uid;
   });
@@ -22,6 +24,12 @@ const GearListBoard = () => {
   const gearLists = useSelector(({ firestore: { ordered } }) => {
     return ordered && ordered.allUserLists;
   });
+
+  useEffect(() => {
+    return () => {
+      dispatch({ type: actionTypes.CLEAR_DATA });
+    };
+  }, [dispatch]);
 
   if (!gearLists) {
     return <RenderPreloader />;

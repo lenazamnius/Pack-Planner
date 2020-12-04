@@ -5,6 +5,7 @@ import { capitalize } from '../../../../helpers/helpersFunc';
 import { logOut } from '../../../../store/actions/authActions';
 import { createGearList } from '../../../../store/actions/gearListActions';
 import image from '../../../../data/images/mountain.jpg';
+import book from '../../../../routes/book';
 import { v4 as uuidv4 } from 'uuid';
 import './LoggedInSideMenu.css';
 
@@ -12,8 +13,6 @@ const LoggedInSideMenu = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.firebase.profile);
-
-  const handleLogOut = () => dispatch(logOut());
 
   const handleCreateList = () => {
     const newListId = uuidv4();
@@ -37,12 +36,12 @@ const LoggedInSideMenu = () => {
         </div>
       </li>
       <li>
-        <NavLink to="/" className="sidenav-close">
+        <NavLink to={book.home} className="sidenav-close">
           <i className="material-icons">home</i> Home
         </NavLink>
       </li>
       <li>
-        <NavLink to="/gear-list-board" className="sidenav-close">
+        <NavLink to={book.listsBoard} className="sidenav-close">
           <i className="material-icons">dashboard</i> MyGearLists
         </NavLink>
       </li>
@@ -55,13 +54,12 @@ const LoggedInSideMenu = () => {
         <div className="divider"></div>
       </li>
       <li className="px">
-        <NavLink
-          to="/login"
-          onClick={handleLogOut}
-          className="sidenav-close waves-effect waves-light btn-small deep-orange lighten-3"
+        <div
+          onClick={() => dispatch(logOut(history))}
+          className="sidenav-close waves-effect waves-light btn-small deep-orange lighten-3 bnt-logout"
         >
           LogOut
-        </NavLink>
+        </div>
       </li>
     </ul>
   );

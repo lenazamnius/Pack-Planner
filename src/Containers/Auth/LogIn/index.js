@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useSelector, useDispatch } from 'react-redux';
 import { logIn } from '../../../store/actions/authActions';
 import RenderInput from '../../../components/FormFields/RenderInput';
+import book from '../../../routes/book';
 
 const LogIn = () => {
   const { register, handleSubmit, reset, errors } = useForm();
@@ -25,7 +26,7 @@ const LogIn = () => {
       >
         <p className="center-align mb">
           If you haven't register yet{' '}
-          <Link to="/signup" className="teal-text">
+          <Link to={book.signup} className="teal-text">
             SignUp
           </Link>
         </p>

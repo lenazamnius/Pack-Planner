@@ -4,7 +4,7 @@ import './GearListBody.css';
 
 const GearListBody = ({ listUnit, categoryListing }) => {
   return (
-    <div className="px">
+    <div>
       {categoryListing &&
         categoryListing.map((category) => {
           return (

@@ -1,173 +1,72 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useParams } from 'react-router';
 import { useForm } from 'react-hook-form';
-import { useSelector } from 'react-redux';
-import { useFirestore } from 'react-redux-firebase';
+import { useDispatch } from 'react-redux';
+import GearListDatePicker from './components/GearListDatePicker';
 import IconButton from '../../../../components/Buttons/IconButton';
+import GearListHeaderFooter from './components/GearListHeaderFooter';
 import RenderInput from '../../../../components/FormFields/RenderInput';
 import RenderSelect from '../../../../components/FormFields/RenderSelect';
-import TextIconButton from '../../../../components/Buttons/TextIconButton';
+import book from '../../../../routes/book';
 import {
-  travelTypeOptions,
   seasonOptions,
   landscapeOptions,
+  travelTypeOptions,
 } from '../../../../data/selectData';
-import { capitalize } from '../../../../helpers/helpersFunc';
-import { unitOptions } from '../../../../data/selectData';
-import './GearListHeader.css';
+import {
+  deleteGearList,
+  updateListTile,
+  updateListAbout,
+} from '../../../../store/actions/gearListActions';
+
 import M from 'materialize-css';
+import './GearListHeader.css';
+import GearListStatistics from './components/GearListStatistics';
 
 const GearListHeader = ({ headerData }) => {
-  const {
-    unit,
-    type,
-    title,
-    season,
-    endDate,
-    startDate,
-    landscape,
-    itemsCount,
-    totalWeight,
-    description,
-  } = headerData;
+  const { unit, type, title, season, endDate, startDate } = headerData;
+  const { landscape, itemsCount, totalWeight, description } = headerData;
+  const [curDescription, setCurDescription] = useState(description);
+  const [curTitle, setCurTitle] = useState(title);
   const { register, getValues } = useForm();
   const { id: listId } = useParams();
-  const firestore = useFirestore();
-
-  const userId = useSelector((state) => state.firebase.auth);
+  const dispatch = useDispatch();
 
   const titleOnBlurHandle = () => {
-    const title = getValues('title');
+    const newTitle = getValues('title');
 
-    return firestore
-      .collection('gearLists')
-      .doc(listId)
-      .update({ title: capitalize(title) })
-      .then(() => {
-        return firestore
-          .collection('users')
-          .doc(userId.uid)
-          .collection('gearListing')
-          .doc(listId)
-          .update({ title: capitalize(title) });
-      })
-      .then(() => {
-        console.log('List title successfully updated!');
-      })
-      .catch((error) => {
-        console.error('Error updating list title: ', error);
-      });
+    if (curTitle !== newTitle) {
+      setCurTitle(newTitle);
+      dispatch(updateListTile(listId, newTitle));
+    }
   };
-
-  const startDateOnChangeHandle = () => {
-    const startDate = getValues('startDate');
-    console.log(startDate);
-
-    // return firestore
-    //   .collection('gearLists')
-    //   .doc(listId)
-    //   .update({ startDate: startDate })
-    //   .then(() => {
-    //     return firestore
-    //       .collection('users')
-    //       .doc(userId.uid)
-    //       .collection('gearListing')
-    //       .doc(listId)
-    //       .update({ startDate: startDate });
-    //   })
-    //   .then(() => {
-    //     console.log('List startDate successfully updated!');
-    //   })
-    //   .catch((error) => {
-    //     console.error('Error updating list startDate: ', error);
-    //   });
-  };
-
-  const endDateOnChangeHandle = () => {};
 
   const descriptionOnBlurHandle = () => {
-    const description = getValues('description');
+    const newDescription = getValues('description');
 
-    return firestore
-      .collection('gearLists')
-      .doc(listId)
-      .update({ description })
-      .then(() => {
-        console.log('List description successfully updated!');
-      })
-      .catch((error) => {
-        console.error('Error updating list description: ', error);
-      });
+    if (curDescription !== newDescription) {
+      setCurDescription(newDescription);
+      dispatch(updateListAbout(listId, { description: newDescription }));
+    }
   };
+
   const typeOnChangeHandle = () => {
     const type = getValues('type');
 
-    return firestore
-      .collection('gearLists')
-      .doc(listId)
-      .update({ type })
-      .then(() => {
-        console.log('List type successfully updated!');
-      })
-      .catch((error) => {
-        console.error('Error updating list type: ', error);
-      });
+    dispatch(updateListAbout(listId, { type }));
   };
+
   const seasonOnChangeHandle = () => {
     const season = getValues('season');
 
-    return firestore
-      .collection('gearLists')
-      .doc(listId)
-      .update({ season })
-      .then(() => {
-        console.log('List season successfully updated!');
-      })
-      .catch((error) => {
-        console.error('Error updating list season: ', error);
-      });
+    dispatch(updateListAbout(listId, { season }));
   };
+
   const landscapeOnChangeHandle = () => {
     const landscape = getValues('landscape');
 
-    return firestore
-      .collection('gearLists')
-      .doc(listId)
-      .update({ landscape })
-      .then(() => {
-        console.log('List landscape successfully updated!');
-      })
-      .catch((error) => {
-        console.error('Error updating list landscape: ', error);
-      });
-  };
-
-  const addNewCategory = (listId) => {
-    const newCategory = { title: '', itemsCount: 0, totalWeight: 0 };
-    return firestore
-      .collection('gearLists')
-      .doc(listId)
-      .collection('categoryListing')
-      .add(newCategory);
-  };
-
-  const onClickHandle = () => {
-    addNewCategory(listId);
-  };
-
-  const unitOnChangeHandle = () => {
-    const unit = getValues('unit');
-
-    return firestore
-      .collection('gearLists')
-      .doc(listId)
-      .update({ unit })
-      .then(() => {
-        console.log('List unit successfully updated!');
-      })
-      .catch((error) => {
-        console.error('Error updating list unit: ', error);
-      });
+    dispatch(updateListAbout(listId, { landscape }));
   };
 
   useEffect(() => M.AutoInit());
@@ -179,59 +78,23 @@ const GearListHeader = ({ headerData }) => {
           <RenderInput
             ref={register}
             name="title"
-            placeholder={!title ? 'Enter title' : null}
-            defaultValue={title && title}
+            placeholder={!curTitle ? 'Enter title' : null}
+            defaultValue={curTitle && curTitle}
             onBlurHandle={titleOnBlurHandle}
           />
         </div>
-        <div className="col s1">
-          <IconButton />
-        </div>
+        <Link to={book.listsBoard} className="col s1 gl-header-del-btn">
+          <IconButton onClickHandle={() => dispatch(deleteGearList(listId))} />
+        </Link>
       </div>
 
       <div className="row">
         <div className="col s12 l8">
           <div className="row">
-            <div className="col s12 l6 xl5 gl-header-date">
-              <span className="gl-header-input-label">Start date: </span>
-              <div className="input-field inline">
-                <RenderInput
-                  ref={register}
-                  name="startDate"
-                  className="datepicker"
-                  defaultValue={startDate && startDate}
-                  onChangeHandle={startDateOnChangeHandle}
-                />
-              </div>
-            </div>
-            <div className="col s12 l6 xl5 gl-header-date">
-              <span className="gl-header-input-label">End date: </span>
-              <div className="input-field inline">
-                <RenderInput
-                  ref={register}
-                  name="endDate"
-                  className="datepicker"
-                  defaultValue={endDate && endDate}
-                  onChangeHandle={endDateOnChangeHandle}
-                />
-              </div>
-            </div>
+            <GearListDatePicker start={startDate} end={endDate} />
           </div>
 
           <div className="row">
-            <div className="col s12 l4">
-              <span className="gl-header-input-label">Season: </span>
-              <div className="input-field inline">
-                <RenderSelect
-                  ref={register}
-                  name="season"
-                  options={seasonOptions}
-                  defaultValue={season && season}
-                  label={!season ? 'select season' : ''}
-                  onChangeHandle={seasonOnChangeHandle}
-                />
-              </div>
-            </div>
             <div className="col s12 l4">
               <span className="gl-header-input-label">Travel type: </span>
               <div className="input-field inline">
@@ -258,6 +121,19 @@ const GearListHeader = ({ headerData }) => {
                 />
               </div>
             </div>
+            <div className="col s12 l4">
+              <span className="gl-header-input-label">Season: </span>
+              <div className="input-field inline">
+                <RenderSelect
+                  ref={register}
+                  name="season"
+                  options={seasonOptions}
+                  defaultValue={season && season}
+                  label={!season ? 'select season' : ''}
+                  onChangeHandle={seasonOnChangeHandle}
+                />
+              </div>
+            </div>
           </div>
 
           <div className="row">
@@ -265,41 +141,21 @@ const GearListHeader = ({ headerData }) => {
               <textarea
                 name="description"
                 className="materialize-textarea"
-                placeholder={!description ? 'Enter description' : null}
-                defaultValue={description && description}
+                placeholder={!curDescription ? 'Enter description' : null}
+                defaultValue={curDescription && curDescription}
                 onBlur={descriptionOnBlurHandle}
                 ref={register}
               ></textarea>
             </div>
           </div>
         </div>
-        <div className="col s12 l4 gl-statistics">
-          <h5>List Statistics</h5>
-          <p>
-            Total weight: {totalWeight ? totalWeight.toFixed(3) : 0}{' '}
-            {unit && unit}
-          </p>
-          <p>Items: {itemsCount ? itemsCount : 0}</p>
-        </div>
-        <div className="col s12 gl-header-footer">
-          <TextIconButton
-            onClickHandle={onClickHandle}
-            text="Add Category"
-            icon="add"
-            classes="waves-purple-custom gl-add-category-btn"
-          />
-          <div className="gl-units">
-            <RenderSelect
-              ref={register}
-              name="unit"
-              options={unitOptions}
-              defaultValue={unit && unit}
-              label={!unit ? 'Select Unit' : ''}
-              onChangeHandle={unitOnChangeHandle}
-            />
-          </div>
-        </div>
+        <GearListStatistics
+          unit={unit}
+          itemsCount={itemsCount}
+          totalWeight={totalWeight}
+        />
       </div>
+      <GearListHeaderFooter unit={unit} />
     </div>
   );
 };

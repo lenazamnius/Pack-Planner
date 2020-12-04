@@ -16,6 +16,7 @@
 }
 
 .gl-header .input-field input:not(.browser-default) {
+  width: 115px;
   height: 1.5rem;
   color: #000000;
   font-size: 1.2rem;
@@ -27,12 +28,16 @@
   margin: 0;
   padding: 0.5rem 0 0.5rem 0.5rem;
   font-size: 1.2rem;
-  font-family: "Montserrat";
   border-bottom: none;
 }
 
 .gl-header  .select-wrapper .caret{
   display: none;
+}
+
+.gl-header-del-btn {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .gl-header-description textarea.materialize-textarea {
@@ -41,6 +46,7 @@
   margin: 0;
   padding: 0;
   font-size: 1.2rem;
+  color: rgb(0 , 0, 0);
   border-bottom: none;
 }
 
@@ -64,18 +70,7 @@
   box-shadow: none;
 }
 
-.gl-header-footer {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.75rem;
-}
-
-.gl-header-footer .waves-effect.waves-purple-custom .waves-ripple  {
-  background-color: rgba(69, 39, 160, .75);
-}
-
-
 .row .col.gl-statistics {
-  padding: 1rem;
+  padding: 0.5rem 1rem;
   background-color:rgba(224, 247, 250, 0.1);
 }

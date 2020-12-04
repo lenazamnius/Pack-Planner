@@ -1,4 +1,5 @@
 import { actionTypes } from 'redux-firestore';
+import book from '../../routes/book';
 
 export const logIn = (credentials) => {
   return (dispatch, getState, { getFirebase }) => {
@@ -16,7 +17,7 @@ export const logIn = (credentials) => {
   };
 };
 
-export const logOut = () => {
+export const logOut = (history) => {
   return (dispatch, getState, { getFirebase }) => {
     const firebase = getFirebase();
 
@@ -24,9 +25,11 @@ export const logOut = () => {
       .auth()
       .signOut()
       .then(() => {
-        // firebase.logout();
         dispatch({ type: 'LOGOUT_SUCCESS' });
         dispatch({ type: actionTypes.CLEAR_DATA });
+      })
+      .then(() => {
+        history.push(`${book.home}`);
       })
       .catch((error) => {
         dispatch({ type: 'LOGOUT_ERROR', error });

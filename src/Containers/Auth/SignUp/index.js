@@ -6,6 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import SignUpSchema from '../../../helpers/SignUpSchema';
 import { signUp } from '../../../store/actions/authActions';
 import RenderInput from '../../../components/FormFields/RenderInput';
+import book from '../../../routes/book';
 
 const SignUp = () => {
   const error = useSelector((state) => state.auth.authError);
@@ -29,7 +30,7 @@ const SignUp = () => {
       >
         <p className="center-align mb">
           If you're already registered{' '}
-          <Link to="/login" className="teal-text">
+          <Link to={book.login} className="teal-text">
             LogIn
           </Link>
         </p>

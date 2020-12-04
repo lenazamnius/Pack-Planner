@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router';
-import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import { useFirestore } from 'react-redux-firebase';
 import IconButton from '../../../../components/Buttons/IconButton';
 import RenderInput from '../../../../components/FormFields/RenderInput';
 import RenderSelect from '../../../../components/FormFields/RenderSelect';
 import { packCategoryOptions } from '../../../../data/selectData';
+import {
+  deleteItem,
+  updateItemName,
+  updateItemCount,
+  updateItemWeight,
+} from '../../../../store/actions/gearListActions';
+
 import './GearListCategoryItem.css';
 
 const GearListCategoryItem = ({
@@ -15,139 +21,52 @@ const GearListCategoryItem = ({
   categoryId,
   categoryName,
 }) => {
-  const firestore = useFirestore();
-  const { register, getValues } = useForm();
-  const options = packCategoryOptions[categoryName];
-
-  const userId = useSelector((state) => state.firebase.auth);
   const { id: itemId, name, weight, qty } = itemData;
-  const { id: listId } = useParams();
   const [curWeight, setCurWeight] = useState(weight);
   const [curQty, setCurQty] = useState(qty);
+  const { register, getValues } = useForm();
+  const { id: listId } = useParams();
+  const dispatch = useDispatch();
 
-  const listRef = firestore.collection('gearLists').doc(listId);
-  const userListRef = firestore
-    .collection('users')
-    .doc(userId.uid)
-    .collection('gearListing')
-    .doc(listId);
-
-  const updateItemName = (name, itemId, catId) => {
-    return listRef
-      .collection('categoryListing')
-      .doc(catId)
-      .collection('items')
-      .doc(itemId)
-      .update({ name })
-      .then(() => {
-        console.log('Item Name successfully updated!');
-      })
-      .catch((error) => {
-        console.error('Error updating Item Name: ', error);
-      });
-  };
+  const options = packCategoryOptions[categoryName];
 
   const nameOnChangeHandle = () => {
     const newName = getValues('itemName');
 
-    updateItemName(newName, itemId, categoryId);
-  };
-  // ================================================================
-  const updateItemWeight = (newWeight, difWeight, itemId, catId) => {
-    return listRef
-      .collection('categoryListing')
-      .doc(catId)
-      .collection('items')
-      .doc(itemId)
-      .update({ weight: newWeight })
-      .then(() => {
-        return listRef.update({
-          totalWeight: firestore.FieldValue.increment(Number(difWeight)),
-        });
-      })
-      .then(() => {
-        console.log('Item Weight successfully updated!');
-      })
-      .catch((error) => {
-        console.error('Error updating Item Weight: ', error);
-      });
+    dispatch(updateItemName(newName, itemId, categoryId, listId));
   };
 
   const weightOnBlurHandle = () => {
     const newWeight = getValues('itemWeight');
-    const difWeight = (newWeight - curWeight) * curQty;
 
-    setCurWeight(newWeight);
-    updateItemWeight(newWeight, difWeight, itemId, categoryId);
-  };
-  // ================================================================
-  const updateItemCount = (newQty, difQty, difWeight, itemId, catId) => {
-    return listRef
-      .collection('categoryListing')
-      .doc(catId)
-      .collection('items')
-      .doc(itemId)
-      .update({ qty: newQty })
-      .then(() => {
-        return listRef.update({
-          itemsCount: firestore.FieldValue.increment(Number(difQty)),
-          totalWeight: firestore.FieldValue.increment(Number(difWeight)),
-        });
-      })
-      .then(() => {
-        return userListRef.update({
-          itemsCount: firestore.FieldValue.increment(Number(difQty)),
-        });
-      })
-      .then(() => {
-        console.log('Count items successfully updated!');
-      })
-      .catch((error) => {
-        console.error('Error updating Count items: ', error);
-      });
+    if (curWeight !== newWeight) {
+      const difWeight = (newWeight - curWeight) * curQty;
+
+      setCurWeight(newWeight);
+      dispatch(
+        updateItemWeight(newWeight, difWeight, itemId, categoryId, listId),
+      );
+    }
   };
 
   const countOnBlurHandle = () => {
     const newQty = getValues('itemCount');
-    const difQty = newQty - curQty;
-    const difWeight = difQty * curWeight;
 
-    setCurQty(newQty);
-    updateItemCount(newQty, difQty, difWeight, itemId, categoryId);
-  };
+    if (newQty !== curQty) {
+      const difQty = newQty - curQty;
+      const difWeight = difQty * curWeight;
 
-  // =========================================================
-
-  const deleteItem = (qty, weight, catId, itemId) => {
-    return listRef
-      .collection('categoryListing')
-      .doc(catId)
-      .collection('items')
-      .doc(itemId)
-      .delete()
-      .then(() => {
-        return listRef.update({
-          itemsCount: firestore.FieldValue.increment(-qty),
-          totalWeight: firestore.FieldValue.increment(-weight),
-        });
-      })
-      .then(() => {
-        return userListRef.update({
-          itemsCount: firestore.FieldValue.increment(-qty),
-        });
-      })
-      .then(() => {
-        console.log('Item successfully deleted!');
-      })
-      .catch((error) => {
-        console.error('Error removing item: ', error);
-      });
+      setCurQty(newQty);
+      dispatch(
+        updateItemCount(newQty, difQty, difWeight, itemId, categoryId, listId),
+      );
+    }
   };
 
   const delOnClickHandle = () => {
     const totalWeight = curQty * curWeight;
 
-    deleteItem(curQty, totalWeight, categoryId, itemId);
+    dispatch(deleteItem(curQty, totalWeight, itemId, categoryId, listId));
   };
 
   return (

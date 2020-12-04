@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 import { isLoaded, isEmpty } from 'react-redux-firebase';
+import book from './book';
 
 const PrivateRoute = ({ children, ...rest }) => {
   const auth = useSelector((state) => state.firebase.auth);
@@ -15,7 +16,7 @@ const PrivateRoute = ({ children, ...rest }) => {
         ) : (
           <Redirect
             to={{
-              pathname: '/login',
+              pathname: `${book.login} `,
               state: { from: location },
             }}
           />

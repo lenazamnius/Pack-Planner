@@ -1,63 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
-import { useSelector } from 'react-redux';
-import { useFirestore, useFirestoreConnect } from 'react-redux-firebase';
-import GearListCategoryItem from '../GearListCategoryItem';
-import GearListCategoryHeader from '../GearListCategoryHeader';
+import { useSelector, useDispatch } from 'react-redux';
+import { useFirestoreConnect } from 'react-redux-firebase';
+import { createCategoryItem } from '../../../../store/actions/gearListActions';
 import TextIconButton from '../../../../components/Buttons/TextIconButton';
+import GearListCategoryHeader from '../GearListCategoryHeader';
+import GearListCategoryItem from '../GearListCategoryItem';
+
 import './GearListCategoryBody.css';
 import M from 'materialize-css';
 
 const GearListCategoryBody = ({ categoryData = {}, listUnit }) => {
   const { id: categoryId, title } = categoryData;
-  const firestore = useFirestore();
   const { id: listId } = useParams();
   const [categoryName, setCategoryName] = useState(title);
   const [addItemBtn, setAddItemBtn] = useState(!title);
+  const dispatch = useDispatch();
 
   useFirestoreConnect([
     {
       collection: `gearLists/${listId}/categoryListing/${categoryId}/items`,
+      orderBy: 'createdAt',
       storeAs: `${categoryId}`,
     },
   ]);
 
-  const userId = useSelector((state) => state.firebase.auth);
   const categoryItems = useSelector(({ firestore: { ordered } }) => {
     return ordered && ordered[categoryId];
   });
-
-  const addCategoryNewItem = () => {
-    const categoryNewItem = { name: '', weight: 0, qty: 1 };
-
-    return firestore
-      .collection('gearLists')
-      .doc(listId)
-      .collection('categoryListing')
-      .doc(categoryId)
-      .collection('items')
-      .add(categoryNewItem)
-      .then(() => {
-        return firestore
-          .collection('gearLists')
-          .doc(listId)
-          .update({ itemsCount: firestore.FieldValue.increment(1) });
-      })
-      .then(() => {
-        return firestore
-          .collection('users')
-          .doc(userId.uid)
-          .collection('gearListing')
-          .doc(listId)
-          .update({ itemsCount: firestore.FieldValue.increment(1) });
-      })
-      .then(() => {
-        console.log('Item successfully added!');
-      })
-      .catch((error) => {
-        console.error('Error adding item: ', error);
-      });
-  };
 
   useEffect(() => M.AutoInit());
 
@@ -89,7 +59,9 @@ const GearListCategoryBody = ({ categoryData = {}, listUnit }) => {
               icon="add"
               classes="waves-teal gl-add-item-btn"
               disabled={addItemBtn}
-              onClickHandle={addCategoryNewItem}
+              onClickHandle={() =>
+                dispatch(createCategoryItem(listId, categoryId))
+              }
             />
           </div>
         </div>
