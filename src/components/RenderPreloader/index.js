@@ -2,10 +2,19 @@ import React from 'react';
 
 const RenderPreloader = () => {
   return (
-    <div className="container semitransparent-container">
-      <h6>Loading</h6>
-      <div className="progress">
-        <div className="indeterminate"></div>
+    <div className="container preloader-container">
+      <div className="preloader-wrapper big active">
+        <div className="spinner-layer spinner-teal-only">
+          <div className="circle-clipper left">
+            <div className="circle"></div>
+          </div>
+          <div className="gap-patch">
+            <div className="circle"></div>
+          </div>
+          <div className="circle-clipper right">
+            <div className="circle"></div>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -34,6 +34,13 @@
 
 /* ========== Common ========== */
 
+.preloader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 25%;
+}
+
 .semitransparent-container,
 .row .col.semitransparent-container {
   margin-top:  5%;

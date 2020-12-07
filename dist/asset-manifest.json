@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/static/css/main.a2ee2a71.chunk.css",
+    "main.js": "/static/js/main.70aa008a.chunk.js",
+    "main.js.map": "/static/js/main.70aa008a.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.04a01770.js",
+    "runtime-main.js.map": "/static/js/runtime-main.04a01770.js.map",
+    "static/css/2.8d5a7bfa.chunk.css": "/static/css/2.8d5a7bfa.chunk.css",
+    "static/js/2.8581f942.chunk.js": "/static/js/2.8581f942.chunk.js",
+    "static/js/2.8581f942.chunk.js.map": "/static/js/2.8581f942.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.55ecb13ae91d05e5dc5f0637c04e38dd.js": "/precache-manifest.55ecb13ae91d05e5dc5f0637c04e38dd.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.8d5a7bfa.chunk.css.map": "/static/css/2.8d5a7bfa.chunk.css.map",
+    "static/css/main.a2ee2a71.chunk.css.map": "/static/css/main.a2ee2a71.chunk.css.map",
+    "static/js/2.8581f942.chunk.js.LICENSE.txt": "/static/js/2.8581f942.chunk.js.LICENSE.txt",
+    "static/media/mountain.jpg": "/static/media/mountain.b81e3043.jpg",
+    "static/media/paul-gilmore-mountains.jpg": "/static/media/paul-gilmore-mountains.75a0b164.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.04a01770.js",
+    "static/css/2.8d5a7bfa.chunk.css",
+    "static/js/2.8581f942.chunk.js",
+    "static/css/main.a2ee2a71.chunk.css",
+    "static/js/main.70aa008a.chunk.js"
+  ]
+}

@@ -19,7 +19,7 @@ const GearList = () => {
     },
     {
       collection: `gearLists/${listId}/categoryListing`,
-      orderBy: 'createdAt',
+      orderBy: ['createdAt', 'desc'],
       storeAs: 'categoriesData',
     },
   ]);
