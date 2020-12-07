@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
+import book from './book';
 
 const PublicRoute = ({ children, ...rest }) => {
   const auth = useSelector((state) => state.firebase.auth);
@@ -14,7 +15,7 @@ const PublicRoute = ({ children, ...rest }) => {
         ) : (
           <Redirect
             to={{
-              pathname: '/gear-list-board',
+              pathname: `${book.listsBoard}`,
               state: { from: location },
             }}
           />

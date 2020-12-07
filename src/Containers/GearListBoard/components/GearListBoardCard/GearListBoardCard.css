@@ -1,0 +1,13 @@
+.card {
+  min-width: 240px;
+}
+
+.card-image {
+  min-height: 136px;
+  background: #00695c;
+}
+
+.image-overlay {
+  object-fit: cover;
+  opacity: 0.55;
+}

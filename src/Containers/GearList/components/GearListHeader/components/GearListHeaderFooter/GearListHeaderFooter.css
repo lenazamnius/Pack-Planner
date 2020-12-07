@@ -1,0 +1,26 @@
+.row .col.gl-header-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 1rem 0 0;
+}
+
+.gl-header-footer .waves-effect.waves-purple-custom .waves-ripple  {
+  background-color: rgba(69, 39, 160, .75);
+}
+
+.gl-units{
+  font-size: 1.2rem;
+}
+
+.gl-units .select-wrapper {
+  width: 45px;
+}
+
+.gl-header .gl-units .select-wrapper input.select-dropdown {
+  margin-left: 0.5rem;
+  text-align: center;
+}
+
+.gl-units .dropdown-content {
+  min-width: 50px;
+}

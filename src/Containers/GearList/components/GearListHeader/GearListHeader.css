@@ -1,0 +1,76 @@
+.gl-header .row {
+  margin-bottom: 0.75rem;
+}
+
+.gl-header-input-label {
+  margin-right: 0.5rem;
+}
+
+.gl-header .input-field {
+  margin-top: 0;
+  margin-bottom: 4px;
+}
+
+.gl-header .input-field.inline input {
+  margin-bottom: 0;
+}
+
+.gl-header .input-field input:not(.browser-default) {
+  width: 115px;
+  height: 1.5rem;
+  color: #000000;
+  font-size: 1.2rem;
+  border-bottom: none;
+}
+
+.gl-header .select-wrapper input.select-dropdown {
+  height: 1.5rem;
+  margin: 0;
+  padding: 0.5rem 0 0.5rem 0.5rem;
+  font-size: 1.2rem;
+  border-bottom: none;
+}
+
+.gl-header  .select-wrapper .caret{
+  display: none;
+}
+
+.gl-header-del-btn {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.gl-header-description textarea.materialize-textarea {
+  height: 2rem;
+  min-height: 1.5rem;
+  margin: 0;
+  padding: 0;
+  font-size: 1.2rem;
+  color: rgb(0 , 0, 0);
+  border-bottom: none;
+}
+
+.gl-header-title input[type=text]:not(.browser-default) {
+  font-size: 1.6rem;
+  border-bottom: none;
+}
+
+.gl-header .select-wrapper input.select-dropdown:focus {
+  border-bottom: none;
+  background-color: rgba(0,0,0,.05);
+}
+
+.gl-header-title input[type=text]:not(.browser-default):focus:not([readonly]),
+.gl-header-description textarea.materialize-textarea:focus:not([readonly]) {
+  border-bottom: none;
+}
+
+.gl-header-date input[type=text]:not(.browser-default):focus:not([readonly]) {
+  border-bottom: none;
+  box-shadow: none;
+}
+
+.row .col.gl-statistics {
+  padding: 0.5rem 1rem;
+  background-color:rgba(224, 247, 250, 0.1);
+}
