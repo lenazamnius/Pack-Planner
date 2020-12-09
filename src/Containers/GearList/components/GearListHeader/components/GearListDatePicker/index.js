@@ -27,7 +27,7 @@ const GearListDatePicker = ({ start, end }) => {
   };
 
   return (
-    <>
+    <div className="row">
       <div className="col s12 m6 xl5 gl-header-date">
         <span className="gl-header-input-label">Start date: </span>
         <div className="input-field inline">
@@ -57,7 +57,7 @@ const GearListDatePicker = ({ start, end }) => {
           />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

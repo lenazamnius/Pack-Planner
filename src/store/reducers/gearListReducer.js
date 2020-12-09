@@ -52,6 +52,12 @@ const gearListsReducer = (state = initState, action) => {
     case 'UPDATE_ITEM_NAME_ERROR':
       console.log(action.error);
       return state;
+    case 'UPDATE_ITEM_PACKED':
+      console.log('update item as packed from reducer', action.gearListId);
+      return state;
+    case 'UPDATE_ITEM_PACKED_ERROR':
+      console.log(action.error);
+      return state;
     case 'UPDATE_ITEM_WEIGHT':
       console.log('update item weight from reducer', action.gearListId);
       return state;

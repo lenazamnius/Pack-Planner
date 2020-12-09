@@ -1,8 +1,7 @@
-.gl-category-header {
+.gl-category-header.row {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.75rem;
+  margin-bottom: 0;
+  padding: 0.6rem 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   background: rgba(0, 0, 0, 0.05);
 }
@@ -21,6 +20,15 @@
   padding: 0;
   border: none;
   align-items: center;
+}
+
+.collapsible-header-item.col.s3 {
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.collapsible-header-item.last-col {
+  justify-content: flex-end;
 }
 
 .collapsible-header i {

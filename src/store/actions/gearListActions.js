@@ -263,6 +263,7 @@ export const createCategoryItem = (listId, categoryId) => {
       .collection('items')
       .add({
         createdAt: new Date(),
+        packed: false,
         weight: 0,
         name: '',
         qty: 1,
@@ -314,18 +315,33 @@ export const updateItemName = (name, itemId, catId, listId) => {
   };
 };
 
-export const updateItemWeight = (
-  newWeight,
-  difWeight,
-  itemId,
-  catId,
-  listId,
-) => {
+export const updateItemAsPacked = (value, itemId, catId, listId) => {
+  return (dispatch, getState, { getFirebase }) => {
+    const firestore = getFirebase().firestore();
+
+    firestore
+      .collection('gearLists')
+      .doc(listId)
+      .collection('categoryListing')
+      .doc(catId)
+      .collection('items')
+      .doc(itemId)
+      .update({ packed: value })
+      .then(() => {
+        dispatch({ type: 'UPDATE_ITEM_PACKED', gearListId: listId });
+      })
+      .catch((error) => {
+        dispatch({ type: 'UPDATE_ITEM_PACKED_ERROR', error });
+      });
+  };
+};
+
+export const updateItemWeight = (weight, difWeight, itemId, catId, listId) => {
   return (dispatch, getState, { getFirebase }) => {
     const firestore = getFirebase().firestore();
     const listRef = firestore.collection('gearLists').doc(listId);
     const weightToUpdateObj = {
-      totalWeight: firebase.firestore.FieldValue.increment(Number(difWeight)),
+      totalWeight: firebase.firestore.FieldValue.increment(difWeight),
     };
 
     listRef
@@ -333,7 +349,7 @@ export const updateItemWeight = (
       .doc(catId)
       .collection('items')
       .doc(itemId)
-      .update({ weight: Number(newWeight) })
+      .update({ weight })
       .then(() => {
         return listRef.update(weightToUpdateObj);
       })
@@ -365,11 +381,11 @@ export const updateItemCount = (
     const userId = getState().firebase.auth.uid;
     const listRef = firestore.collection('gearLists').doc(listId);
     const updateQtyObj = {
-      itemsCount: firebase.firestore.FieldValue.increment(Number(difQty)),
+      itemsCount: firebase.firestore.FieldValue.increment(difQty),
     };
     const updateObj = {
       ...updateQtyObj,
-      totalWeight: firebase.firestore.FieldValue.increment(Number(difWeight)),
+      totalWeight: firebase.firestore.FieldValue.increment(difWeight),
     };
 
     listRef
@@ -377,7 +393,7 @@ export const updateItemCount = (
       .doc(catId)
       .collection('items')
       .doc(itemId)
-      .update({ qty: Number(curQty) })
+      .update({ qty: curQty })
       .then(() => {
         return listRef.update(updateObj);
       })
@@ -410,11 +426,11 @@ export const deleteItem = (qty, weight, itemId, catId, listId) => {
     const userId = getState().firebase.auth.uid;
     const listRef = firestore.collection('gearLists').doc(listId);
     const updateQtyObj = {
-      itemsCount: firebase.firestore.FieldValue.increment(-Number(qty)),
+      itemsCount: firebase.firestore.FieldValue.increment(-qty),
     };
     const updateObj = {
       ...updateQtyObj,
-      totalWeight: firebase.firestore.FieldValue.increment(-Number(weight)),
+      totalWeight: firebase.firestore.FieldValue.increment(-weight),
     };
 
     listRef

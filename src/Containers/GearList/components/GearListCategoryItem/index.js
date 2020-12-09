@@ -11,6 +11,7 @@ import {
   updateItemName,
   updateItemCount,
   updateItemWeight,
+  updateItemAsPacked,
 } from '../../../../store/actions/gearListActions';
 
 import './GearListCategoryItem.css';
@@ -21,14 +22,13 @@ const GearListCategoryItem = ({
   categoryId,
   categoryName,
 }) => {
-  const { id: itemId, name, weight, qty } = itemData;
+  const { id: itemId, name, weight, qty, packed } = itemData;
+  const options = packCategoryOptions[categoryName];
   const [curWeight, setCurWeight] = useState(weight);
   const [curQty, setCurQty] = useState(qty);
   const { register, getValues } = useForm();
   const { id: listId } = useParams();
   const dispatch = useDispatch();
-
-  const options = packCategoryOptions[categoryName];
 
   const nameOnChangeHandle = () => {
     const newName = getValues('itemName');
@@ -36,15 +36,21 @@ const GearListCategoryItem = ({
     dispatch(updateItemName(newName, itemId, categoryId, listId));
   };
 
+  const packedOnChangeHandle = () => {
+    const newValue = !packed;
+
+    dispatch(updateItemAsPacked(newValue, itemId, categoryId, listId));
+  };
+
   const weightOnBlurHandle = () => {
     const newWeight = getValues('itemWeight');
 
     if (curWeight !== newWeight) {
-      const difWeight = (newWeight - curWeight) * curQty;
+      const difWeight = ((+newWeight - curWeight) * curQty).toFixed(3);
 
-      setCurWeight(newWeight);
+      setCurWeight(+newWeight);
       dispatch(
-        updateItemWeight(newWeight, difWeight, itemId, categoryId, listId),
+        updateItemWeight(newWeight, +difWeight, itemId, categoryId, listId),
       );
     }
   };
@@ -53,24 +59,24 @@ const GearListCategoryItem = ({
     const newQty = getValues('itemCount');
 
     if (newQty !== curQty) {
-      const difQty = newQty - curQty;
-      const difWeight = difQty * curWeight;
+      const difQty = +newQty - curQty;
+      const difWeight = (difQty * curWeight).toFixed(3);
 
-      setCurQty(newQty);
+      setCurQty(+newQty);
       dispatch(
-        updateItemCount(newQty, difQty, difWeight, itemId, categoryId, listId),
+        updateItemCount(newQty, difQty, +difWeight, itemId, categoryId, listId),
       );
     }
   };
 
   const delOnClickHandle = () => {
-    const totalWeight = curQty * curWeight;
+    const totalWeight = (curQty * curWeight).toFixed(3);
 
-    dispatch(deleteItem(curQty, totalWeight, itemId, categoryId, listId));
+    dispatch(deleteItem(curQty, +totalWeight, itemId, categoryId, listId));
   };
 
   return (
-    <div className="gl-category-item row">
+    <div className={`row gl-category-item ${packed ? 'packed' : ''}`}>
       <div className="col s4 m6 first-col">
         <RenderSelect
           ref={register}
@@ -81,7 +87,7 @@ const GearListCategoryItem = ({
           onChangeHandle={nameOnChangeHandle}
         />
       </div>
-      <div className="col s3 m2 df num-input">
+      <div className="col s3 m2 df">
         <RenderInput
           min="0"
           step=".001"
@@ -93,7 +99,7 @@ const GearListCategoryItem = ({
         />
         <span>{listUnit}</span>
       </div>
-      <div className="col s3 m2 df num-input">
+      <div className="col s3 m2 df">
         <RenderInput
           min="1"
           ref={register}
@@ -102,11 +108,14 @@ const GearListCategoryItem = ({
           defaultValue={curQty && curQty}
           onBlurHandle={countOnBlurHandle}
         />
-        <span>items</span>
       </div>
       <div className="col s2 last-col">
         <label>
-          <input type="checkbox" />
+          <input
+            type="checkbox"
+            defaultChecked={packed ? 'checked' : ''}
+            onClick={packedOnChangeHandle}
+          />
           <span></span>
         </label>
         <IconButton onClickHandle={delOnClickHandle} />

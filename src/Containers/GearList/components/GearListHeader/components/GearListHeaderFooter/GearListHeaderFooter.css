@@ -1,7 +1,7 @@
 .row .col.gl-header-footer {
   display: flex;
   justify-content: space-between;
-  padding: 1rem 1rem 0 0;
+  padding-right: 1rem;
 }
 
 .gl-header-footer .waves-effect.waves-purple-custom .waves-ripple  {
