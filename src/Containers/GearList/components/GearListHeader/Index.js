@@ -79,7 +79,7 @@ const GearListHeader = ({ headerData }) => {
           <RenderInput
             ref={register}
             name="title"
-            placeholder={!curTitle ? 'Enter title' : null}
+            placeholder={!curTitle ? 'Enter Pack Title' : null}
             defaultValue={curTitle && curTitle}
             onBlurHandle={titleOnBlurHandle}
           />
@@ -90,7 +90,7 @@ const GearListHeader = ({ headerData }) => {
       </div>
 
       <div className="row">
-        <div className="col s12 l8">
+        <div className="col s12 l8 gl-header-main">
           <GearListDatePicker start={startDate} end={endDate} />
 
           <div className="row">
@@ -98,7 +98,9 @@ const GearListHeader = ({ headerData }) => {
               <textarea
                 name="description"
                 className="materialize-textarea"
-                placeholder={!curDescription ? 'Enter description' : null}
+                placeholder={
+                  !curDescription ? 'Enter pack description...' : null
+                }
                 defaultValue={curDescription && curDescription}
                 onBlur={descriptionOnBlurHandle}
                 ref={register}
@@ -122,7 +124,7 @@ const GearListHeader = ({ headerData }) => {
               name="type"
               options={travelTypeOptions}
               defaultValue={type && type}
-              label={!type ? 'select type' : ''}
+              label={!type ? 'Type' : ''}
               onChangeHandle={typeOnChangeHandle}
             />
           </div>
@@ -137,7 +139,7 @@ const GearListHeader = ({ headerData }) => {
               name="season"
               options={seasonOptions}
               defaultValue={season && season}
-              label={!season ? 'select season' : ''}
+              label={!season ? 'Season' : ''}
               onChangeHandle={seasonOnChangeHandle}
             />
           </div>
@@ -152,7 +154,7 @@ const GearListHeader = ({ headerData }) => {
               name="landscape"
               options={landscapeOptions}
               defaultValue={landscape && landscape}
-              label={!landscape ? 'select landscape' : ''}
+              label={!landscape ? 'Landscape' : ''}
               onChangeHandle={landscapeOnChangeHandle}
             />
           </div>
