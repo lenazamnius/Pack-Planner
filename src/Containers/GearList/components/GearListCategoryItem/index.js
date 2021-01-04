@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
@@ -6,6 +6,7 @@ import IconButton from '../../../../components/Buttons/IconButton';
 import RenderInput from '../../../../components/FormFields/RenderInput';
 import RenderSelect from '../../../../components/FormFields/RenderSelect';
 import { packCategoryOptions } from '../../../../data/selectData';
+import { convertWeight } from '../../../../helpers/helpersFunc';
 import {
   deleteItem,
   updateItemName,
@@ -24,6 +25,7 @@ const GearListCategoryItem = ({
 }) => {
   const { id: itemId, name, weight, qty, packed } = itemData;
   const options = packCategoryOptions[categoryName];
+
   const [curWeight, setCurWeight] = useState(weight);
   const [curQty, setCurQty] = useState(qty);
   const { register, getValues } = useForm();
@@ -97,7 +99,8 @@ const GearListCategoryItem = ({
           defaultValue={curWeight && curWeight}
           onBlurHandle={weightOnBlurHandle}
         />
-        <span>{listUnit}</span>
+        {/* <span>{listUnit}</span> */}
+        <span>g</span>
       </div>
       <div className="col s3 m2 df">
         <RenderInput

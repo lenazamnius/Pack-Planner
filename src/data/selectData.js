@@ -188,8 +188,8 @@ export const landscapeOptions = [
 export const unitOptions = [
   { id: 'kg', value: 'kg' },
   { id: 'g', value: 'g' },
-  { id: 'lb', value: 'lb' },
-  { id: 'oz', value: 'oz' },
+  // { id: 'lb', value: 'lb' },
+  // { id: 'oz', value: 'oz' },
 ];
 
 export const typeIcons = {

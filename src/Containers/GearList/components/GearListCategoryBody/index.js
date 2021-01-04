@@ -7,6 +7,7 @@ import TextIconButton from '../../../../components/Buttons/TextIconButton';
 import IconButton from '../../../../components/Buttons/IconButton';
 import GearListCategoryHeader from '../GearListCategoryHeader';
 import GearListCategoryItem from '../GearListCategoryItem';
+import { convertWeight } from '../../../../helpers/helpersFunc';
 
 import './GearListCategoryBody.css';
 import M from 'materialize-css';
@@ -73,7 +74,8 @@ const GearListCategoryBody = ({ categoryData = {}, listUnit }) => {
               />
             </div>
             <div className="col s3 m2">
-              {totalWeight <= 0.001 ? '0' : totalWeight.toFixed(3)} {listUnit}
+              {totalWeight ? convertWeight(totalWeight, listUnit) : '0'}{' '}
+              {listUnit}
             </div>
             <div className="col s3 m2">
               {itemsCount} item

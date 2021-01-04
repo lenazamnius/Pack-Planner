@@ -117,7 +117,7 @@ const GearListHeader = ({ headerData }) => {
       </div>
 
       <div className="row gl-header-about">
-        <div className="col s4 l3 offset-l3">
+        <div className="col s12 m4 l3 offset-l3">
           <div className="input-field inline">
             <RenderSelect
               ref={register}
@@ -132,7 +132,7 @@ const GearListHeader = ({ headerData }) => {
             <i className="material-icons">{type && typeIcons[type]}</i>
           </span>
         </div>
-        <div className="col s4 l3">
+        <div className="col s12 m4 l3">
           <div className="input-field inline">
             <RenderSelect
               ref={register}
@@ -147,7 +147,7 @@ const GearListHeader = ({ headerData }) => {
             <i className="material-icons">{season && typeIcons[season]}</i>
           </span>
         </div>
-        <div className="col s4 l3">
+        <div className="col s12 m4 l3">
           <div className="input-field inline">
             <RenderSelect
               ref={register}

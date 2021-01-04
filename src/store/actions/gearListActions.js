@@ -16,6 +16,7 @@ export const createGearList = (listId, history) => {
         itemsCount: 0,
         title: '',
         userId,
+        unit: 'g',
       })
       .then(() => {
         history.push(`${book.toList}/${listId}`);

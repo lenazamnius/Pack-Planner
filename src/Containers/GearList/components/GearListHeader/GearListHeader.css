@@ -99,9 +99,9 @@
   border-bottom: 1px solid rgba(0, 0, 0, .1);
 }
 
-.gl-header-about.row .col.s4 {
+.gl-header-about.row .col.s12 {
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
+  justify-content: center;
+  align-items: flex-end;
   padding: 0.5rem 1rem 0.5rem 0;
 }
