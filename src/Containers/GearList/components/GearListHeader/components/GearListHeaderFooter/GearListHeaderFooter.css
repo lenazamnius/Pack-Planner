@@ -1,24 +1,28 @@
-.row .col.gl-header-footer {
+.row.gl-header-footer .col {
   display: flex;
   justify-content: space-between;
-  padding: 1rem 1rem 0 0;
+  padding-right: 1rem;
 }
 
 .gl-header-footer .waves-effect.waves-purple-custom .waves-ripple  {
   background-color: rgba(69, 39, 160, .75);
 }
 
-.gl-units{
+.gl-units {
   font-size: 1.2rem;
 }
 
 .gl-units .select-wrapper {
-  width: 45px;
+  width: 60px;
+}
+
+.gl-units .select-wrapper .caret {
+  fill: rgba(0, 0, 0, .5);
 }
 
 .gl-header .gl-units .select-wrapper input.select-dropdown {
   margin-left: 0.5rem;
-  text-align: center;
+  text-align: left;
 }
 
 .gl-units .dropdown-content {

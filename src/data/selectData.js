@@ -188,6 +188,22 @@ export const landscapeOptions = [
 export const unitOptions = [
   { id: 'kg', value: 'kg' },
   { id: 'g', value: 'g' },
-  { id: 'lb', value: 'lb' },
-  { id: 'oz', value: 'oz' },
+  // { id: 'lb', value: 'lb' },
+  // { id: 'oz', value: 'oz' },
 ];
+
+export const typeIcons = {
+  winter: 'ac_unit',
+  spring: 'spa',
+  autumn: 'cloud_queue',
+  summer: 'brightness_medium',
+  mountains: 'terrain',
+  woodland: 'nature_people',
+  rivers: 'gesture',
+  plain: 'drag_handle',
+  combined: 'autorenew',
+  foot: 'directions_walk',
+  bicycle: 'directions_bike',
+  kayak: 'rowing',
+  skies: 'pause',
+};

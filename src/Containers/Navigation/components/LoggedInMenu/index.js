@@ -24,11 +24,11 @@ const LoggedInMenu = () => {
         <NavLink to={book.home}>Home</NavLink>
       </li>
       <li>
-        <NavLink to={book.listsBoard}>MyGearLists</NavLink>
+        <NavLink to={book.listsBoard}>My GearLists</NavLink>
       </li>
       <li>
         <div className="gl-nav-element" onClick={handleCreateList}>
-          CreateGearList
+          Create GearList
         </div>
       </li>
       <li>

@@ -42,12 +42,12 @@ const LoggedInSideMenu = () => {
       </li>
       <li>
         <NavLink to={book.listsBoard} className="sidenav-close">
-          <i className="material-icons">dashboard</i> MyGearLists
+          <i className="material-icons">dashboard</i> My GearLists
         </NavLink>
       </li>
       <li>
         <div onClick={handleCreateList} className="sidenav-close">
-          <i className="material-icons">add</i> CreateGearList
+          <i className="material-icons">add</i> Create GearList
         </div>
       </li>
       <li>

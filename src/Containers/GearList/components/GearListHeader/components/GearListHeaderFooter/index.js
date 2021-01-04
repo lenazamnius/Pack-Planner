@@ -24,8 +24,8 @@ const GearListHeaderFooter = ({ unit }) => {
   };
 
   return (
-    <div className="row">
-      <div className="col s12 gl-header-footer">
+    <div className="row gl-header-footer">
+      <div className="col s12 ">
         <TextIconButton
           onClickHandle={() => dispatch(addCategory(listId))}
           text="Add Category"

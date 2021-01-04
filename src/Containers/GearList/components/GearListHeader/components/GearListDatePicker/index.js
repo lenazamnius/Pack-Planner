@@ -27,9 +27,11 @@ const GearListDatePicker = ({ start, end }) => {
   };
 
   return (
-    <>
+    <div className="row">
       <div className="col s12 m6 xl5 gl-header-date">
-        <span className="gl-header-input-label">Start date: </span>
+        <span className="gl-header-date-icon">
+          <i className="material-icons prefix">date_range</i>
+        </span>
         <div className="input-field inline">
           <DatePicker
             dateFormat="MMM dd yyyy"
@@ -43,7 +45,9 @@ const GearListDatePicker = ({ start, end }) => {
         </div>
       </div>
       <div className="col s12 m6 xl5 gl-header-date">
-        <span className="gl-header-input-label">End date: </span>
+        <span className="gl-header-date-icon">
+          <i className="material-icons prefix">date_range</i>
+        </span>
         <div className="input-field inline">
           <DatePicker
             dateFormat="MMM dd yyyy"
@@ -57,7 +61,7 @@ const GearListDatePicker = ({ start, end }) => {
           />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

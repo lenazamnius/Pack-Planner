@@ -30,22 +30,26 @@ const GearListCategoryHeader = ({
   };
 
   return (
-    <div className="gl-category-header">
-      <div className="collapsible-header-item">
+    <div className="gl-category-header row">
+      <div className="collapsible-header-item col s4 m6">
         <i className="material-icons gl-category-title">list</i>
-        {
-          <RenderSelect
-            ref={register}
-            id="categoryName"
-            name="categoryName"
-            options={packCategories}
-            defaultValue={title && title}
-            label={!title ? 'Select Category' : ''}
-            onChangeHandle={onChangeHandle}
-          />
-        }
+        <RenderSelect
+          ref={register}
+          id="categoryName"
+          name="categoryName"
+          options={packCategories}
+          defaultValue={title && title}
+          label={!title ? 'Select Category' : ''}
+          onChangeHandle={onChangeHandle}
+        />
       </div>
-      <div className="collapsible-header-item">
+      <div className="collapsible-header-item col s3 m2 col-title">
+        Item Weight
+      </div>
+      <div className="collapsible-header-item col s3 m2 col-title">
+        Quantity
+      </div>
+      <div className="collapsible-header-item col s2 last-col">
         <div className="waves-effect btn-flat expand collapsible-header">
           <i className="material-icons expand">keyboard_arrow_up</i>
         </div>

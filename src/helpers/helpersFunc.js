@@ -31,3 +31,11 @@ export const showDates = (start, end) => {
     return `${sd} - ${ed}`;
   }
 };
+
+export const convertWeight = (value, unit) => {
+  if (unit && unit === 'g') {
+    return value;
+  } else if (unit && unit === 'kg') {
+    return value / 1000;
+  }
+};

@@ -2,8 +2,9 @@
   margin-bottom: 0.75rem;
 }
 
-.gl-header-input-label {
-  margin-right: 0.5rem;
+.gl-header-input-icon {
+  margin-left: 1rem;
+  color: rgba(0, 0, 0, .5);
 }
 
 .gl-header .input-field {
@@ -17,22 +18,26 @@
 
 .gl-header .input-field input:not(.browser-default) {
   width: 115px;
-  height: 1.5rem;
+  height: 2rem;
+  padding-left: 0.5rem;
   color: #000000;
-  font-size: 1.2rem;
-  border-bottom: none;
+  font-size: 1.1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, .1);
 }
 
 .gl-header .select-wrapper input.select-dropdown {
   height: 1.5rem;
   margin: 0;
   padding: 0.5rem 0 0.5rem 0.5rem;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
+  text-align: end;
   border-bottom: none;
 }
 
-.gl-header  .select-wrapper .caret{
-  display: none;
+.gl-header-about .select-wrapper .caret{
+  left: 0;
+  margin: auto 0;
+  fill: rgba(0, 0, 0, .5);
 }
 
 .gl-header-del-btn {
@@ -41,12 +46,12 @@
 }
 
 .gl-header-description textarea.materialize-textarea {
-  height: 2rem;
-  min-height: 1.5rem;
+  height: 5rem;
   margin: 0;
-  padding: 0;
-  font-size: 1.2rem;
-  color: rgb(0 , 0, 0);
+  padding: 0.75rem 1.5rem 0 0;
+  font-size: 1.1rem;
+  line-height: 21px;
+  color: rgb(0, 0, 0, .6);
   border-bottom: none;
 }
 
@@ -57,7 +62,7 @@
 
 .gl-header .select-wrapper input.select-dropdown:focus {
   border-bottom: none;
-  background-color: rgba(0,0,0,.05);
+  background-color: rgba(0, 0, 0, .05);
 }
 
 .gl-header-title input[type=text]:not(.browser-default):focus:not([readonly]),
@@ -70,7 +75,33 @@
   box-shadow: none;
 }
 
+.row .col.gl-header-main {
+  padding: 0.5rem 0.75rem 0 0.75rem;
+}
+
 .row .col.gl-statistics {
   padding: 0.5rem 1rem;
-  background-color:rgba(224, 247, 250, 0.1);
+  background-color:rgba(224, 247, 250, .1);
+}
+
+.gl-header-about .input-field {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.gl-header-about.row {
+  margin-top: 1.5rem;
+}
+
+.gl-header-about .select-wrapper input.select-dropdown {
+  padding: 0.5rem 0.5rem 0.5rem 0;
+  font-size: 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, .1);
+}
+
+.gl-header-about.row .col.s12 {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 0.5rem 1rem 0.5rem 0;
 }

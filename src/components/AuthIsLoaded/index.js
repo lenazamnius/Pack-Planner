@@ -1,10 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { isLoaded } from 'react-redux-firebase';
+import RenderPreloader from '../../components/RenderPreloader';
 
 const AuthIsLoaded = ({ children }) => {
   const auth = useSelector((state) => state.firebase.auth);
-  if (!isLoaded(auth)) return <div>Loading Screen...</div>;
+  if (!isLoaded(auth)) return <RenderPreloader />;
   return children;
 };
 

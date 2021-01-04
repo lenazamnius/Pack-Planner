@@ -4,8 +4,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useFirestoreConnect } from 'react-redux-firebase';
 import { createCategoryItem } from '../../../../store/actions/gearListActions';
 import TextIconButton from '../../../../components/Buttons/TextIconButton';
+import IconButton from '../../../../components/Buttons/IconButton';
 import GearListCategoryHeader from '../GearListCategoryHeader';
 import GearListCategoryItem from '../GearListCategoryItem';
+import { convertWeight } from '../../../../helpers/helpersFunc';
 
 import './GearListCategoryBody.css';
 import M from 'materialize-css';
@@ -28,6 +30,12 @@ const GearListCategoryBody = ({ categoryData = {}, listUnit }) => {
   const categoryItems = useSelector(({ firestore: { ordered } }) => {
     return ordered && ordered[categoryId];
   });
+
+  const categoryInfo = useSelector(({ firestore: { data } }) => {
+    return data && data.categoriesData[categoryId];
+  });
+
+  const { totalWeight, itemsCount } = categoryInfo;
 
   useEffect(() => M.AutoInit());
 
@@ -53,16 +61,40 @@ const GearListCategoryBody = ({ categoryData = {}, listUnit }) => {
                 />
               );
             })}
-          <div className="gl-category-footer">
-            <TextIconButton
-              text="Add Category Item"
-              icon="add"
-              classes="waves-teal gl-add-item-btn"
-              disabled={addItemBtn}
-              onClickHandle={() =>
-                dispatch(createCategoryItem(listId, categoryId))
-              }
-            />
+          <div className="gl-category-footer row">
+            <div className="col s4 m6">
+              <TextIconButton
+                text="Add Category Item"
+                icon="add"
+                classes="waves-teal gl-add-item-btn"
+                disabled={addItemBtn}
+                onClickHandle={() =>
+                  dispatch(createCategoryItem(listId, categoryId))
+                }
+              />
+            </div>
+            <div className="col s3 m2">
+              {totalWeight ? convertWeight(totalWeight, listUnit) : '0'}{' '}
+              {listUnit}
+            </div>
+            <div className="col s3 m2">
+              {itemsCount} item
+              {itemsCount !== 1 ? 's' : ''}
+            </div>
+            <div className="col s2 last-col">
+              <label>
+                <input
+                  type="checkbox"
+                  onClick={() => console.log('check all items onclick')}
+                />
+                <span></span>
+              </label>
+              <IconButton
+                onClickHandle={() =>
+                  console.log('checked items delete onclick')
+                }
+              />
+            </div>
           </div>
         </div>
       </li>

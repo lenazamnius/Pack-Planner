@@ -10,6 +10,7 @@ import RenderInput from '../../../../components/FormFields/RenderInput';
 import RenderSelect from '../../../../components/FormFields/RenderSelect';
 import book from '../../../../routes/book';
 import {
+  typeIcons,
   seasonOptions,
   landscapeOptions,
   travelTypeOptions,
@@ -78,7 +79,7 @@ const GearListHeader = ({ headerData }) => {
           <RenderInput
             ref={register}
             name="title"
-            placeholder={!curTitle ? 'Enter title' : null}
+            placeholder={!curTitle ? 'Enter Pack Title' : null}
             defaultValue={curTitle && curTitle}
             onBlurHandle={titleOnBlurHandle}
           />
@@ -89,59 +90,17 @@ const GearListHeader = ({ headerData }) => {
       </div>
 
       <div className="row">
-        <div className="col s12 l8">
-          <div className="row">
-            <GearListDatePicker start={startDate} end={endDate} />
-          </div>
-
-          <div className="row">
-            <div className="col s12 l4">
-              <span className="gl-header-input-label">Travel type: </span>
-              <div className="input-field inline">
-                <RenderSelect
-                  ref={register}
-                  name="type"
-                  options={travelTypeOptions}
-                  defaultValue={type && type}
-                  label={!type ? 'select type' : ''}
-                  onChangeHandle={typeOnChangeHandle}
-                />
-              </div>
-            </div>
-            <div className="col s12 l4">
-              <span className="gl-header-input-label">Landscape: </span>
-              <div className="input-field inline">
-                <RenderSelect
-                  ref={register}
-                  name="landscape"
-                  options={landscapeOptions}
-                  defaultValue={landscape && landscape}
-                  label={!landscape ? 'select landscape' : ''}
-                  onChangeHandle={landscapeOnChangeHandle}
-                />
-              </div>
-            </div>
-            <div className="col s12 l4">
-              <span className="gl-header-input-label">Season: </span>
-              <div className="input-field inline">
-                <RenderSelect
-                  ref={register}
-                  name="season"
-                  options={seasonOptions}
-                  defaultValue={season && season}
-                  label={!season ? 'select season' : ''}
-                  onChangeHandle={seasonOnChangeHandle}
-                />
-              </div>
-            </div>
-          </div>
+        <div className="col s12 l8 gl-header-main">
+          <GearListDatePicker start={startDate} end={endDate} />
 
           <div className="row">
             <div className="col s12 gl-header-description">
               <textarea
                 name="description"
                 className="materialize-textarea"
-                placeholder={!curDescription ? 'Enter description' : null}
+                placeholder={
+                  !curDescription ? 'Enter pack description...' : null
+                }
                 defaultValue={curDescription && curDescription}
                 onBlur={descriptionOnBlurHandle}
                 ref={register}
@@ -149,11 +108,62 @@ const GearListHeader = ({ headerData }) => {
             </div>
           </div>
         </div>
+
         <GearListStatistics
           unit={unit}
           itemsCount={itemsCount}
           totalWeight={totalWeight}
         />
+      </div>
+
+      <div className="row gl-header-about">
+        <div className="col s12 m4 l3 offset-l3">
+          <div className="input-field inline">
+            <RenderSelect
+              ref={register}
+              name="type"
+              options={travelTypeOptions}
+              defaultValue={type && type}
+              label={!type ? 'Type' : ''}
+              onChangeHandle={typeOnChangeHandle}
+            />
+          </div>
+          <span className="gl-header-input-icon">
+            <i className="material-icons">{type && typeIcons[type]}</i>
+          </span>
+        </div>
+        <div className="col s12 m4 l3">
+          <div className="input-field inline">
+            <RenderSelect
+              ref={register}
+              name="season"
+              options={seasonOptions}
+              defaultValue={season && season}
+              label={!season ? 'Season' : ''}
+              onChangeHandle={seasonOnChangeHandle}
+            />
+          </div>
+          <span className="gl-header-input-icon">
+            <i className="material-icons">{season && typeIcons[season]}</i>
+          </span>
+        </div>
+        <div className="col s12 m4 l3">
+          <div className="input-field inline">
+            <RenderSelect
+              ref={register}
+              name="landscape"
+              options={landscapeOptions}
+              defaultValue={landscape && landscape}
+              label={!landscape ? 'Landscape' : ''}
+              onChangeHandle={landscapeOnChangeHandle}
+            />
+          </div>
+          <span className="gl-header-input-icon">
+            <i className="material-icons">
+              {landscape && typeIcons[landscape]}
+            </i>
+          </span>
+        </div>
       </div>
       <GearListHeaderFooter unit={unit} />
     </div>
